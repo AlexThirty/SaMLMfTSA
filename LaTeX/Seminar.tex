@@ -1,0 +1,583 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+\usetheme{Warsaw}
+%\beamertemplatenavigationsymbolsempty
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{etex}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{cite}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathrsfs,mathtools}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{hyperref} % References become hyperlinks.
+\hypersetup{
+	%colorlinks = true,
+	linkcolor = {blue},
+	urlcolor = {red},
+	citecolor = {blue},
+	%pdfenconing=auto,
+}
+\usepackage{wrapfig}
+%\usepackage{arydshln}
+\usepackage{array}
+\usepackage[T1]{fontenc} 
+\usepackage{bm}
+\usepackage{multicol, multirow}
+\usepackage{grffile,pgf,tikz}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{animate}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+		language=Python,
+		basicstyle=\ttm,
+		morekeywords={self},              % Add keywords here
+		keywordstyle=\ttb\color{deepblue},
+		emph={MyClass,__init__},          % Custom highlighting
+		emphstyle=\ttb\color{deepred},    % Custom highlighting style
+		stringstyle=\color{deepgreen},
+		frame=tb,                         % Any extra options here
+		showstringspaces=false
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+	\pythonstyle
+	\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+		\pythonstyle
+		\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
+
+\usetikzlibrary{matrix}
+\usetikzlibrary{shapes.geometric,calc,arrows}
+
+%\usepackage{unicode-math}
+%\setmathfont{XITS Math}
+%\setmathfont[version=setB,StylisticSet=1]{XITS Math}
+
+
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+%\newtheorem{lemma}[teo]{Lemma}
+\newtheorem{prop}[teo]{Proposizione}
+\newtheorem{post}{Postulato}
+\newtheorem{cor}[teo]{Corollario}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definizione}
+\newtheorem{exmp}[defn]{Esempio}
+\newtheorem{oss}[defn]{Osservazione}
+\newtheorem{prob}{Problema}
+\newtheorem*{prob*}{Problema}
+\newtheorem{hint}{Indizio}
+\newtheorem*{notaz}{Notazione}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\LL}{\mathscr{L}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\SP}{\mathbb{S}}
+\newcommand{\dsum}{\displaystyle\sum}
+\newcommand{\dint}{\displaystyle\int}
+\newcommand{\scal}[2]{\langle #1,#2 \rangle}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\eval}[3]{\Big[ #1 \Big]_{#2}^{#3}}
+%\newcommand{\sob}[3]{W^{#1, #2}(#3)}
+%\newcommand{\sobzero}[3]{W_{0}^{#1, #2}(#3)}
+%\newcommand{\sobloc}[3]{W_{\text{loc}}^{#1, #2}(#3)}
+\newcommand{\weakconv}{\rightharpoonup}
+\newcommand{\weakconvs}{\overset{\ast}{\rightharpoonup}}
+
+
+
+\newcommand{\dx}{\text{d}x}
+\newcommand{\dt}{\text{d}t}
+\newcommand{\dy}{\text{d}y}
+\newcommand{\diff}{\text{d}}
+\newcommand{\dX}{\text{d}\bm{x}}
+\newcommand{\dFX}{\text{d}F(\bm{x})}
+\newcommand{\dfX}{\text{d}f(\bm{x})}
+\newcommand{\dFx}{\text{d}F(x)}
+\newcommand{\dfx}{\text{d}f(x)}
+\newcommand{\X}{\bm{X}}
+\newcommand{\x}{\bm{x}}
+\newcommand{\B}{\bm{b}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Pro}{\mathbf{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bh}{\hat{\bm{b}}}
+\newcommand{\Sh}{\hat{S}}
+\newcommand{\dmu}{\text{d}\mu(\B)}
+\newcommand{\Ph}{\hat{\mathbf{P}}}
+\newcommand{\Ct}{\tilde{C}}
+\newcommand{\Dt}{\tilde{D}}
+
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Orb}{Orb}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Imm}{Im}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\cof}{cof}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\dive}{div}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Lip}{Lip}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\extr}{extr}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\divergence}{div}
+\DeclareMathOperator{\baric}{bar}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newcommand{\grad}{\nabla}
+\newcommand{\perim}{\mathcal{P}}%%%%%%%%%%%%%%%
+%%ATTENZIONE: HO TOLTO LE PARENTESI, ORA \perim METTE SOLO LA P
+\newcommand{\symmdiff}{\Delta}
+\newcommand{\bdry}{\partial}
+\newcommand{\clos}[1]{\overline{#1}}
+\newcommand{\lebesgue}{\ensuremath{\mathscr{L}}}
+
+
+%definizioni che servono solo per la tesi magistrale
+\newcommand{\FF}{\mathcal{F}}	%funzionale completo dell'energia
+\newcommand{\FFF}{\widetilde{\mathcal{F}}} %funzionale dell'energia sui sottoinsiemi disgiunti
+\newcommand{\GG}{\mathcal{G}}	%funzionale con potenza positiva al posto del perimetro
+\newcommand{\RR}{\mathcal{R}}	%funzionale di Riesz
+\newcommand{\riesz}[1]{\iint_{#1 \times #1}\frac{1}{|x-y|^{N-\alpha}}\dx\dy}
+\newcommand{\genriesz}[2]{\iint_{#1 \times #1}#2(|x-y|)\dx\dy}
+
+
+
+%debug
+\newcommand{\avviso}[1]{{\textcolor{red}{\textbf{#1}}}}
+
+
+\newcommand\restr[2]{\ensuremath{\left.#1\right|_{#2}}}
+
+
+\newcommand{\boh}{\textcolor{red}{\Huge\textbf{???}}}
+\newcommand{\attenzione}{\textcolor{red}{\Huge\textbf{!!!}}}
+\newcommand{\vitali}{\textcolor{red}{\Huge\textbf{Vitali}}}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Interpretability in deep learning for finance]{Interpretability in deep learning for finance: \\a case study for the Heston model} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[Alessandro Trenta]{\emph{Alessandro Trenta}} % Your name
+\institute[SNS] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{Scuola Normale Superiore \\ % Your institution for the title page
+% Your email address
+}
+\date{} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+	\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+	\tableofcontents
+\end{frame}
+
+\section{Interpretability of neural network calibration}
+
+\begin{frame}
+	\frametitle{Calibration using neural networks}
+	\begin{itemize}
+		\item A typical task is to find the correct parameters for a model, given some benchmark data such as option prices or volatilities.
+		\item This problem can be really slow to solve: sometimes there are no analytic solutions and finding the global minimum of an optimization problem can be very time consuming.
+		\item Using neural network for model calibration purposes is becoming popular and widely used as it is fast, robust and accurate.
+		\item In this experiment we use the NN for the whole calibration process, from the market quotes into the model parameters.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Interpretability models}
+	\begin{itemize}
+		\item Interpretability models aim to answer the following question: which input features affect the most our model parameters?
+		\item Two main advantages: for models we have complete knowledge on we can verify if what the algorithm does matches our interpretation or even reject the NN architecture. On the other hand, they can be useful to better understand how a model works.
+		\item Interpretability is still an active research: we don't know much about this concept as it differs from the simple understanding of an algorithm. We want to look at how the model works on data and how the data affect this model an the output parameters.
+		\item Sometimes certain procedures give better accuracy but lack in interpretability.
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Local interpretability}
+	Local interpretability models aim to interpret single prediction based on some input features.
+	
+	Let $f$ be the function defining the original model we want to understand and let $\hat{f}$ be the prediction model obtained calibrating the NN. We want to interpret a single prediction $y = \hat{f}(x)$.\newline
+	It is often used a simplified input $x'$ defined by a mapping $x=h_x(x')$ which usually converts the input into a binary vector of features.
+	\begin{itemize}
+		\item a $0$ component, means that the feature is taken as the mean of the data set. It indicates that the input is "standard" on this component.
+		\item a $1$ component indicates a feature taken as a particular value, different from the mean of the data set.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{equation}
+		x = [m_1, v_2, m_3, m_4, v_5] \mapsto x' = [0,1,0,0,1]
+	\end{equation}
+	so that
+	\begin{equation}
+		h_x([0,1,0,0,1]) = [m_1, v_2, m_3, m_4, v_5]
+	\end{equation}
+	Then we call a model $g$ \textbf{local} if $\hat{f}$ can be locally approximated by $g$, so that $z' \sim x'$, then $g(z')\sim \hat{f}(h_x(z'))$.\newline
+	We suppose the model $g$ has an \textit{additive feature attribution}, so that
+	\begin{equation}
+		g(z')=\phi_0 + \sum_{i = 1}^{M}{\phi_iz_i'}
+	\end{equation}
+	where $M$ is the number of simplified features, $\phi_i$ is the contribution of a feature ($\phi_0$ is the contribution of the standard vector).
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Procedure}
+		\begin{itemize}
+			\item Select an instance $x$ whose model prediction is to be explained.
+			\item Perturb the data set and generate prediction for these new data points.
+			\item Set weights for the new samples based on their proximity to $x$.
+			\item Train the model $g$ with weights on the data set with variations.
+			\item Interpret the obtain prediction by explaining the local model $g$.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LIME}
+	\begin{itemize}
+		\item Local interpretable model-agnostic explanations.
+		\item We want to minimize the objective function
+		\begin{equation}
+			\xi = \argmin_{g\in \mathcal{G}}L(f,g,\pi_{x'})+\Omega(g)
+		\end{equation}
+		where $g$ is the explanation model for $x'$ that minimizes the loss function $L$, $\Omega(g)$ penalises the complexity of $g$ and $\pi_{x'}$ is a set of weights for $L$ for the samples in the neighborhood of $x'$.
+		\item Solved using a penalised linear regression.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{DeepLIFT and LRP}
+	\begin{itemize}
+		\item \textbf{Deep-learning important features}: for each input $x_i$, the attribution $C_{\Delta x_i\Delta y}$ is computed by the effect of the input $x_i$ with respect of a reference value in a recursive way.
+		\item We want the condition to be satisfied $\sum_{i=1}^{n}{C_{\Delta x_i \Delta t}}=\Delta t$ where $t=f(x)$ is the model output and $\Delta t= f(x)-f(a)$ where $a$ is reference value.
+		\item $z_{ij}=w^{(l+1,l)}_{ji}x_i^{(l)}$ is the weighted activation of neuron $j$ in layer $l+1$ by neuron $i$ in layer $l$. The reference value $\bar{z}_{ij}$ is computed running the NN with the reference input $\bar{x}$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item We proceed backwards by setting $r_i^{(L)}=S_i(x)-S_i(\bar{x})$ for unit $i$ of the output ($S_i$ is the output function).
+		\item Then the backwards pass is given by
+		\begin{equation}
+			r_i^{(l)} = \sum_j\frac{z_{ji}-\bar{z}_{ji}}{\sum_{k}z_{jk}-\sum_{k}{\bar{z}_{jk}}}r_j^{(l+1)}
+		\end{equation}
+		\item Then, $\phi_i^c(x)=r_i^{(1)}$.
+		\item \textbf{Layer-wise relevance propagation}: is a DeepLIFT where the reference activation for all neurons is set to $0$. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Global interpretability}
+	\begin{itemize}
+		\item The main method is Shapley values.
+		\item It is based on game theory and the idea is to compute the average marginal contribution of each player $i$ to the total game payout.
+		\item Consider the prediction task as a game and each feature value as a player. The gain is calculated as the difference between the prediction for a particular instance and the average prediction for all instances.
+		\item We proceed by adding a feature at each step. The values $\phi_i$ are calculated as
+		\begin{equation*}
+			\phi_i(\hat{f},x) = \sum_{z'\subseteq x'\setminus \{i\}}\frac{|z'|!(M-|z'|-1)!}{M!}(\hat{f}(h_x(z'\cup \{i\}))-\hat{f}(h_x(z')))
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	We require some conditions
+	\begin{itemize}
+		\item Efficiency: the total gain is recovered
+		\begin{equation}
+			\sum_{i}\phi(\hat{f},x) = \hat{f}(x) -\E[\hat{f}(x)]
+		\end{equation}
+		\item Dummy: if $j$ never adds value, then $\phi_j = 0$.
+		\begin{equation}
+			\forall S \;\; f(S\cup \{x_j\})=f(S) \implies \phi_j=0
+		\end{equation}
+		\item Simmetry: if two features contribute equally then they have the same value
+		\begin{equation}
+			\forall S\;\; f(S\cup \{x_k\})=f(S\cup \{x_j\})\implies \phi_k = \phi_j
+		\end{equation}
+		\item Additivity: if $f=f_1+f_2$ then $\phi(f)=\phi(f_1)+\phi(f_2)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item Local accuracy: given $x=h_x(x')$
+		\begin{equation}
+			f(x) = g(x') = \phi_0 + \sum_{i}{\phi_ix_i'}
+		\end{equation}
+		\item Missingness: feature missing in $x$ should have no impact, so $x_i'=0$ implies $\phi_i=0$.
+		\item Consistency: if we have two models, the change in values should be consistent
+		\begin{equation*}
+			f_2(z')-f_2(z'\setminus \{i\})\geq f_1(z')-f_1(z'\setminus \{i\}) \implies \phi_i(f_2,x)\geq \phi_i(f_1,x)
+		\end{equation*}
+	\end{itemize}
+	It is claimed but not proved that the formula for $\phi_i$ shown before is the only possible.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Procedure}
+	\begin{itemize}
+		\item We add one by one the features, setting $\phi_i(f,x)=\E[f(z)|x_1=z_1], \ldots$
+		\item In general, $f_x(z') = f(h_x(z'))=\E[f(z)|z_A]$ where $A$ is the set of non zero features of $z'$.
+		\item The exact value can be hard to compute, we can use an approximation
+		\begin{equation}
+			\begin{split}
+			f(h_x(z')) & = \E[f(z)|z_A] \\
+			& = \E_{z_{\bar{A}}|z_A}[f(z)]\\
+			& \sim \E_{z_{\bar{A}}}[f(z)]\\
+			& \sim f([z_A, E[z_{\bar{A}}]])
+			\end{split}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+\section{Calibration of the Heston Model}
+
+\begin{frame}
+	\frametitle{The Heston model}
+	The model is defined as
+	\begin{equation}
+		\begin{split}
+		&dS_t = \sqrt{v_t}S_tdW_{1t}, \;\;\; S_0\\
+		&dv_t = \kappa(\theta - v_t)dt +\sigma \sqrt{v_t}dW_{2t}, \;\;\; v_0\\
+		&dW_{1t}dW_{2t} = \rho dt
+		\end{split}
+	\end{equation}
+	We set the dividen yield to zero, as well as the risk free rate. From now we assume $S_0=1$.\newline
+	The free parameters we aim to find for generated data are $\psi = \{v_0, \rho, \sigma, \theta, \kappa\}$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Descriptions and conditions}
+	\begin{itemize}
+		\item $v_0>0$ is the initial value for the variance.
+		\item $\rho\in[-1,1]$ is the correlations between the two Brownian motions.
+		\item $\sigma\geq 0$ is the volatility of volatility.
+		\item $\theta >0 $ is the long-term mean of variance.
+		\item $\kappa\geq 0$ is the mean-reverting speed.
+	\end{itemize}
+	We also require the Feller condition $2\kappa\theta > \sigma^2$ so that the instantaneous variance is always strictly positive.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Calibration via neural networks}
+	Usually we aim to find the parameters which minimize the errors between the model market prices and the actual for a set of strikes and maturities.\newline
+	If we consider the option prices
+	\begin{equation}
+		C(\psi;K,T) = \E^{Q(\psi)}[(S_T-K)^+]
+	\end{equation}
+	and the mean squared error
+	\begin{equation}
+		L(\psi;C^{mkt})=\frac{1}{n} \sum_{i=1}^{n}(C(\psi;K_i,T_i)-C_i^{mkt})^2
+	\end{equation}
+	we want to compute
+	\begin{equation}
+		C^{mkt}\mapsto \psi^* = \argmin_\psi L(\psi;C^{mkt})
+	\end{equation}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Synthetic data sets}
+	The input we consider will be the volatilities of market option.
+	\begin{itemize}
+		\item First, we generate the model parameters to be learned (train $\sim 8500$, test $\sim 1500$), selecting the ones that respect the Feller condition. The distribution is supposed to be uniform and independent between parameters with the following bounds
+		\begin{table}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline 
+			parameter & $v_0$ & $\rho$ & $\sigma$ & $\theta$ & $\kappa$ \\ 
+			\hline 
+			lower bound & 0.0001 & -0.95 & 0.01 & 0.01 & 1.0 \\ 
+			\hline 
+			upper bound & 0.04 & -0.1 & 1.0 & 0.2 & 10.0 \\ 
+			\hline 
+		\end{tabular} 
+		\end{table}
+		\item We then calculate the volatilities for a set of strikes and maturities:
+		\begin{equation}
+			\begin{split}
+			& K = \{0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5\}\\
+			& T = \{0.1, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.0\}
+			\end{split}
+		\end{equation}
+		\item The input dimension is then $8\times 11 =88$.
+	\end{itemize}
+\end{frame}
+
+\section{Data processing and results}
+
+\begin{frame}
+	\frametitle{Some used quantities and functions}
+	\begin{itemize}
+		\item Mean squared logarithmic error:
+		\begin{equation}
+			L(y,\hat{y})=\frac{1}{N}\sum_{i = 1}^N{\left(\log\left(\frac{y+1}{\hat{y}+1}\right)\right)^2}
+		\end{equation}
+		\item ELU activation function:
+		\begin{equation}
+			\begin{cases}
+			x \;\;\;\;\; : x\geq 0\\
+			\alpha(e^x-1) \;\; : x < 0
+			\end{cases}
+		\end{equation}
+		\item Hard sigmoid activation function:
+		\begin{equation}
+			\max\left(0, \min\left(1, \frac{1+x}{2}\right)\right)
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\centering{\hyperref{https://gitlab.com/Alexthirty/QF_seminar}{}{}{https://gitlab.com/Alexthirty/QF\_seminar}}
+	\Huge{\centerline{Thank you!}} 
+\end{frame}
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
