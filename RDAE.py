@@ -33,6 +33,7 @@ def plot_ten_images(X_corr, X):
 
 def corrupt(X, eps, p_corr):
     X_all_corr = X + eps * np.random.randn(X.shape[0], X.shape[1])
+    X_all_corr = np.clip(X_all_corr, 0, 1)
     mask = np.random.choice([0, 1], size=X.shape, p=[1-p_corr, p_corr]) != 0
     X_corr = X.copy()
     X_corr[mask] = X_all_corr[mask]
@@ -159,13 +160,13 @@ if __name__=='__main__':
     x_train = x_train.reshape((x_train.shape[0], 784))
     x_test = x_test.reshape((x_test.shape[0], 784))
     
-    x_train_corr = corrupt(x_train, eps=0.5, p_corr=0.1)
+    x_train_corr = corrupt(x_train, eps=0.5, p_corr=0.25)
 
     print(f'Train data shape: {x_train.shape}')
     print(f'Test data shape: {x_test.shape}')
     RAEl1Dense = RobustAutoencoder(AE_type='Dense', prox_type='l1')
     
-    LD, S = RAEl1Dense.train_and_fit(X=x_train_corr, train_iter=100, AE_train_iter=10, batch_size=1024, eps=1e-4)
+    LD, S = RAEl1Dense.train_and_fit(X=x_train_corr, train_iter=100, AE_train_iter=10, batch_size=512, eps=1e-3)
     
     x_train_corr = x_train_corr.reshape((x_train_corr.shape[0], 28, 28, 1))
     LD = LD.reshape((LD.shape[0], 28, 28, 1))
