@@ -295,8 +295,8 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Interpretability in deep learning for finance]{Interpretability in deep learning for finance: \\a case study for the Heston model} % The short title appears at the bottom of every slide, the full title is only on the title page
-
+\title[Anomaly Detection with Robust Deep Autoencoders]{Anomaly Detection with Robust Deep Autoencoders} % The short title appears at the bottom of every slide, the full title is only on the title page
+\subtitle[]{original article by C. Zhou and R. C. Peffenroth}
 \author[Alessandro Trenta]{\emph{Alessandro Trenta}} % Your name
 \institute[SNS] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {Scuola Normale Superiore \\ % Your institution for the title page
@@ -314,267 +314,90 @@
 	\tableofcontents
 \end{frame}
 
-\section{Interpretability of neural network calibration}
+\nocite{RAE}
+
+\section{Background}
 
 \begin{frame}
-	\frametitle{Calibration using neural networks}
+	\frametitle{Deep Autoencoders}
 	\begin{itemize}
-		\item A typical task is to find the correct parameters for a model, given some benchmark data such as option prices or volatilities.
-		\item This problem can be really slow to solve: sometimes there are no analytic solutions and finding the global minimum of an optimization problem can be very time consuming.
-		\item Using neural network for model calibration purposes is becoming popular and widely used as it is fast, robust and accurate.
-		\item In this experiment we use the NN for the whole calibration process, from the market quotes into the model parameters.
+		\item A Deep Autoencoder (DAE) is constituted by two main components: an encoder $E$ and a Decoder $D$.
+		\item The main objective of a DAE is to learn the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$.
+		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coding space. Usually they are Deep Neural Networks e.g. a feed forward network or even more complex models such as Long ShortTer Memory (LSTM).
+		\item The objective is usually to find the minimum reconstruction error w.r.t. some parametrized encoding and decoding functions and a distance (in this case the $L_2$ norm)
+			\begin{equation}
+				\min_{\theta, \phi}{\norm{X-D_{\theta}(E_{\phi}(X))}_{2}}
+			\end{equation}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Interpretability models}
+	\frametitle{Principal Component Analysis}
 	\begin{itemize}
-		\item Interpretability models aim to answer the following question: which input features affect the most our model parameters?
-		\item Two main advantages: for models we have complete knowledge on we can verify if what the algorithm does matches our interpretation or even reject the NN architecture. On the other hand, they can be useful to better understand how a model works.
-		\item Interpretability is still an active research: we don't know much about this concept as it differs from the simple understanding of an algorithm. We want to look at how the model works on data and how the data affect this model an the output parameters.
-		\item Sometimes certain procedures give better accuracy but lack in interpretability.
-	\end{itemize}
-	
-\end{frame}
-
-\begin{frame}
-	\frametitle{Local interpretability}
-	Local interpretability models aim to interpret single prediction based on some input features.
-	
-	Let $f$ be the function defining the original model we want to understand and let $\hat{f}$ be the prediction model obtained calibrating the NN. We want to interpret a single prediction $y = \hat{f}(x)$.\newline
-	It is often used a simplified input $x'$ defined by a mapping $x=h_x(x')$ which usually converts the input into a binary vector of features.
-	\begin{itemize}
-		\item a $0$ component, means that the feature is taken as the mean of the data set. It indicates that the input is "standard" on this component.
-		\item a $1$ component indicates a feature taken as a particular value, different from the mean of the data set.
+		\item Assume to have a set of $N$ samples of $n$ dimensional data, so that $X\in \R^{N\times n}$ s.t. each column has $0$ mean (we can just shift the data to fulfill this request).
+		\item Principal Component Analysis (PCA) is defined as an orthogonal linear transformation such that the new coordinate system of $\R^{n}$ satisfies: 
+			the $i$-th component of the coordinate system has the $i$-th greatest data variance if we project all samples on that component.
+		\item Ideally we are trying to fit a $n$-ellipsoid into the data. The length of an axis of the ellipsoid represents the variance of data along that axis.
+		\item PCA is often used for dimensionality reduction or encoding: we can project the data on the first $k<n$ principal components.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\begin{equation}
-		x = [m_1, v_2, m_3, m_4, v_5] \mapsto x' = [0,1,0,0,1]
-	\end{equation}
-	so that
-	\begin{equation}
-		h_x([0,1,0,0,1]) = [m_1, v_2, m_3, m_4, v_5]
-	\end{equation}
-	Then we call a model $g$ \textbf{local} if $\hat{f}$ can be locally approximated by $g$, so that $z' \sim x'$, then $g(z')\sim \hat{f}(h_x(z'))$.\newline
-	We suppose the model $g$ has an \textit{additive feature attribution}, so that
-	\begin{equation}
-		g(z')=\phi_0 + \sum_{i = 1}^{M}{\phi_iz_i'}
-	\end{equation}
-	where $M$ is the number of simplified features, $\phi_i$ is the contribution of a feature ($\phi_0$ is the contribution of the standard vector).
-\end{frame}
-
-\begin{frame}
-	\begin{block}{Procedure}
-		\begin{itemize}
-			\item Select an instance $x$ whose model prediction is to be explained.
-			\item Perturb the data set and generate prediction for these new data points.
-			\item Set weights for the new samples based on their proximity to $x$.
-			\item Train the model $g$ with weights on the data set with variations.
-			\item Interpret the obtain prediction by explaining the local model $g$.
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-\begin{frame}
-	\frametitle{LIME}
-	\begin{itemize}
-		\item Local interpretable model-agnostic explanations.
-		\item We want to minimize the objective function
+	\frametitle{Principal Component Analysis}
+	Mathematically we can define:
 		\begin{equation}
-			\xi = \argmin_{g\in \mathcal{G}}L(f,g,\pi_{x'})+\Omega(g)
+			w_1 = \argmax_{\norm{w}_{2}=1}{\norm{Xw}_{2}^2} = \argmax_{w}{\frac{w^TX^TXw}{w^Tw}}
 		\end{equation}
-		where $g$ is the explanation model for $x'$ that minimizes the loss function $L$, $\Omega(g)$ penalises the complexity of $g$ and $\pi_{x'}$ is a set of weights for $L$ for the samples in the neighborhood of $x'$.
-		\item Solved using a penalised linear regression.
-	\end{itemize}
+		for the first component. Then for the $k$-th component we first subtract the first $k-1$ principal component from $X$
+		\begin{equation}
+			\hat{X}_{k} = X - \sum_{i=1}^{k-1}{Xw_{i}w_{i}^T}
+		\end{equation}
+		and finally solving again the similar problem:
+		\begin{equation}
+			w_k = \argmax_{\norm{w}_{2}=1}{\norm{\hat{X}_{k}w}_{2}^2} = \argmax_{w}{\frac{w^T\hat{X}_{k}^T\hat{X}_{k}w}{w^Tw}}
+		\end{equation}
 \end{frame}
 
 \begin{frame}
-	\frametitle{DeepLIFT and LRP}
+	\frametitle{Robust Principal Component Analysis}
 	\begin{itemize}
-		\item \textbf{Deep-learning important features}: for each input $x_i$, the attribution $C_{\Delta x_i\Delta y}$ is computed by the effect of the input $x_i$ with respect of a reference value in a recursive way.
-		\item We want the condition to be satisfied $\sum_{i=1}^{n}{C_{\Delta x_i \Delta t}}=\Delta t$ where $t=f(x)$ is the model output and $\Delta t= f(x)-f(a)$ where $a$ is reference value.
-		\item $z_{ij}=w^{(l+1,l)}_{ji}x_i^{(l)}$ is the weighted activation of neuron $j$ in layer $l+1$ by neuron $i$ in layer $l$. The reference value $\bar{z}_{ij}$ is computed running the NN with the reference input $\bar{x}$.
+		\item Robust Principal Component Analysis (RPCA) is a generalization of PCA that aims to reduce the sensitivity of PCA to outliers.
+		\item The idea is to find a low-dimensional representation of data cleaned from the sparse outliers that can disturb the PCA process.
+		\item We therefore assume that data $X$ can be represented as $X = L + S$: $L$ has low rank and is the low-dimensional representation of $X$ while $S$ is a sparse matrix 
+			consisting of the outlier elements that cannot be captured by the representation.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Robust Principal Component Analysis}
 	\begin{itemize}
-		\item We proceed backwards by setting $r_i^{(L)}=S_i(x)-S_i(\bar{x})$ for unit $i$ of the output ($S_i$ is the output function).
-		\item Then the backwards pass is given by
-		\begin{equation}
-			r_i^{(l)} = \sum_j\frac{z_{ji}-\bar{z}_{ji}}{\sum_{k}z_{jk}-\sum_{k}{\bar{z}_{jk}}}r_j^{(l+1)}
-		\end{equation}
-		\item Then, $\phi_i^c(x)=r_i^{(1)}$.
-		\item \textbf{Layer-wise relevance propagation}: is a DeepLIFT where the reference activation for all neurons is set to $0$. 
+		\item The problem can be addressed as:
+			\begin{align}
+				\min_{L,S}{\rho(L)+\lambda \norm{S}_{0}}\\
+				\text{s. t. }\norm{X - L - S}_{F}^2=0 
+			\end{align}
+			where $\rho(\cdot)$ is the rank of a matrix and we used the zero norm.
+		\item This optimization problem is NP-hard and tractable only for small metrices.
+		\item Usually it is substituted by the following problem, which is convex and tractable also for large matrices:
+			\begin{align}
+				\min_{L,S}{\norm{L}_{*}+\lambda \norm{S}_{1}}\\
+				\text{s. t. }\norm{X - L - S}_F^2=0
+			\end{align}
+			where $\norm{\cdot}_*$ is the nuclear norm i. e. the sum of singular values of a matrix.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Global interpretability}
-	\begin{itemize}
-		\item The main method is Shapley values.
-		\item It is based on game theory and the idea is to compute the average marginal contribution of each player $i$ to the total game payout.
-		\item Consider the prediction task as a game and each feature value as a player. The gain is calculated as the difference between the prediction for a particular instance and the average prediction for all instances.
-		\item We proceed by adding a feature at each step. The values $\phi_i$ are calculated as
-		\begin{equation*}
-			\phi_i(\hat{f},x) = \sum_{z'\subseteq x'\setminus \{i\}}\frac{|z'|!(M-|z'|-1)!}{M!}(\hat{f}(h_x(z'\cup \{i\}))-\hat{f}(h_x(z')))
-		\end{equation*}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	We require some conditions
-	\begin{itemize}
-		\item Efficiency: the total gain is recovered
-		\begin{equation}
-			\sum_{i}\phi(\hat{f},x) = \hat{f}(x) -\E[\hat{f}(x)]
-		\end{equation}
-		\item Dummy: if $j$ never adds value, then $\phi_j = 0$.
-		\begin{equation}
-			\forall S \;\; f(S\cup \{x_j\})=f(S) \implies \phi_j=0
-		\end{equation}
-		\item Simmetry: if two features contribute equally then they have the same value
-		\begin{equation}
-			\forall S\;\; f(S\cup \{x_k\})=f(S\cup \{x_j\})\implies \phi_k = \phi_j
-		\end{equation}
-		\item Additivity: if $f=f_1+f_2$ then $\phi(f)=\phi(f_1)+\phi(f_2)$
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\begin{itemize}
-		\item Local accuracy: given $x=h_x(x')$
-		\begin{equation}
-			f(x) = g(x') = \phi_0 + \sum_{i}{\phi_ix_i'}
-		\end{equation}
-		\item Missingness: feature missing in $x$ should have no impact, so $x_i'=0$ implies $\phi_i=0$.
-		\item Consistency: if we have two models, the change in values should be consistent
-		\begin{equation*}
-			f_2(z')-f_2(z'\setminus \{i\})\geq f_1(z')-f_1(z'\setminus \{i\}) \implies \phi_i(f_2,x)\geq \phi_i(f_1,x)
-		\end{equation*}
-	\end{itemize}
-	It is claimed but not proved that the formula for $\phi_i$ shown before is the only possible.
-\end{frame}
-
-\begin{frame}
-	\frametitle{Procedure}
-	\begin{itemize}
-		\item We add one by one the features, setting $\phi_i(f,x)=\E[f(z)|x_1=z_1], \ldots$
-		\item In general, $f_x(z') = f(h_x(z'))=\E[f(z)|z_A]$ where $A$ is the set of non zero features of $z'$.
-		\item The exact value can be hard to compute, we can use an approximation
-		\begin{equation}
-			\begin{split}
-			f(h_x(z')) & = \E[f(z)|z_A] \\
-			& = \E_{z_{\bar{A}}|z_A}[f(z)]\\
-			& \sim \E_{z_{\bar{A}}}[f(z)]\\
-			& \sim f([z_A, E[z_{\bar{A}}]])
-			\end{split}
-		\end{equation}
-	\end{itemize}
-\end{frame}
-
-\section{Calibration of the Heston Model}
-
-\begin{frame}
-	\frametitle{The Heston model}
-	The model is defined as
-	\begin{equation}
-		\begin{split}
-		&dS_t = \sqrt{v_t}S_tdW_{1t}, \;\;\; S_0\\
-		&dv_t = \kappa(\theta - v_t)dt +\sigma \sqrt{v_t}dW_{2t}, \;\;\; v_0\\
-		&dW_{1t}dW_{2t} = \rho dt
-		\end{split}
-	\end{equation}
-	We set the dividen yield to zero, as well as the risk free rate. From now we assume $S_0=1$.\newline
-	The free parameters we aim to find for generated data are $\psi = \{v_0, \rho, \sigma, \theta, \kappa\}$.
-\end{frame}
-
-\begin{frame}
-	\frametitle{Descriptions and conditions}
-	\begin{itemize}
-		\item $v_0>0$ is the initial value for the variance.
-		\item $\rho\in[-1,1]$ is the correlations between the two Brownian motions.
-		\item $\sigma\geq 0$ is the volatility of volatility.
-		\item $\theta >0 $ is the long-term mean of variance.
-		\item $\kappa\geq 0$ is the mean-reverting speed.
-	\end{itemize}
-	We also require the Feller condition $2\kappa\theta > \sigma^2$ so that the instantaneous variance is always strictly positive.
-\end{frame}
-
-\begin{frame}
-	\frametitle{Calibration via neural networks}
-	Usually we aim to find the parameters which minimize the errors between the model market prices and the actual for a set of strikes and maturities.\newline
-	If we consider the option prices
-	\begin{equation}
-		C(\psi;K,T) = \E^{Q(\psi)}[(S_T-K)^+]
-	\end{equation}
-	and the mean squared error
-	\begin{equation}
-		L(\psi;C^{mkt})=\frac{1}{n} \sum_{i=1}^{n}(C(\psi;K_i,T_i)-C_i^{mkt})^2
-	\end{equation}
-	we want to compute
-	\begin{equation}
-		C^{mkt}\mapsto \psi^* = \argmin_\psi L(\psi;C^{mkt})
-	\end{equation}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Synthetic data sets}
-	The input we consider will be the volatilities of market option.
-	\begin{itemize}
-		\item First, we generate the model parameters to be learned (train $\sim 8500$, test $\sim 1500$), selecting the ones that respect the Feller condition. The distribution is supposed to be uniform and independent between parameters with the following bounds
-		\begin{table}
-		\begin{tabular}{|c|c|c|c|c|c|}
-			\hline 
-			parameter & $v_0$ & $\rho$ & $\sigma$ & $\theta$ & $\kappa$ \\ 
-			\hline 
-			lower bound & 0.0001 & -0.95 & 0.01 & 0.01 & 1.0 \\ 
-			\hline 
-			upper bound & 0.04 & -0.1 & 1.0 & 0.2 & 10.0 \\ 
-			\hline 
-		\end{tabular} 
-		\end{table}
-		\item We then calculate the volatilities for a set of strikes and maturities:
-		\begin{equation}
-			\begin{split}
-			& K = \{0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5\}\\
-			& T = \{0.1, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.0\}
-			\end{split}
-		\end{equation}
-		\item The input dimension is then $8\times 11 =88$.
-	\end{itemize}
-\end{frame}
-
-\section{Data processing and results}
-
-\begin{frame}
-	\frametitle{Some used quantities and functions}
-	\begin{itemize}
-		\item Mean squared logarithmic error:
-		\begin{equation}
-			L(y,\hat{y})=\frac{1}{N}\sum_{i = 1}^N{\left(\log\left(\frac{y+1}{\hat{y}+1}\right)\right)^2}
-		\end{equation}
-		\item ELU activation function:
-		\begin{equation}
-			\begin{cases}
-			x \;\;\;\;\; : x\geq 0\\
-			\alpha(e^x-1) \;\; : x < 0
-			\end{cases}
-		\end{equation}
-		\item Hard sigmoid activation function:
-		\begin{equation}
-			\max\left(0, \min\left(1, \frac{1+x}{2}\right)\right)
-		\end{equation}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-\centering{\hyperref{https://gitlab.com/Alexthirty/QF_seminar}{}{}{https://gitlab.com/Alexthirty/QF\_seminar}}
+\centering{\hyperref{https://github.com/AlexThirty/SaMLMfTSA}{}{}{https://github.com/AlexThirty/SaMLMfTSA}}
 	\Huge{\centerline{Thank you!}} 
 \end{frame}
 
+\nocite{RAE}
+\nocite{DATA}
+\nocite{RPCA}
+
+\bibliographystyle{alpha}
+\bibliography{Bibliography}
 
 
 

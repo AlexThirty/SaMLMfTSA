@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.29)  4 AUG 2022 18:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.29)  8 AUG 2022 17:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -917,8 +917,7 @@ File: pgflibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \c@defn=\count397
 \c@prob=\count398
 \c@hint=\count399
-
-No file Seminar.aux.
+ (Seminar.aux)
 \openout1 = `Seminar.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 307.
@@ -939,6 +938,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 307.
 LaTeX Font Info:    ... okay on input line 307.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 307.
 LaTeX Font Info:    ... okay on input line 307.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1005,6 +1005,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 307.
 LaTeX Info: Redefining \pageref on input line 307.
 LaTeX Info: Redefining \nameref on input line 307.
+ (Seminar.out) (Seminar.out)
 \@outlinefile=\write5
 \openout5 = `Seminar.out'.
 
@@ -1082,35 +1083,31 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count407
+ (Seminar.nav) [1{C:/Users/aless/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
-No file Seminar.nav.
-[1
-
-{C:/Users/aless/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-No file Seminar.toc.
-[2
-
-] [3
-
-] [4
+] (Seminar.toc) [2
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 350.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 332.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 350.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 332.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 350.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 332.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/jknappen\ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 350.
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 332.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/sansmathaccent\ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
-) [5
+) [3
+
+] [4
+
+] [5
 
 ] [6
 
@@ -1118,41 +1115,9 @@ File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mat
 
 ] [8
 
-] [9
+] (Seminar.bbl) [9
 
-] [10
-
-]
-Overfull \hbox (15.58365pt too wide) detected at line 425
-\OML/cmm/m/it/10.95 ^^^[]\OT1/cmss/m/n/10.95 ([]\OML/cmm/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 x\OT1/cmss/m/n/10.95 ) = [] []([](\OT1/mathkerncmss/m/sl/10.95 h[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 z[] \OMS/cmsy/m/n/10.95 [ f\OT1/mathkerncmss/m/sl/10.95 i\OMS/cmsy/m/n/10.95 g\OT1/cmss/m/n/10.95 )) \OMS/cmsy/m/n/10.95 ^^@ []\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 h[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 z[]\OT1/cmss/m/n/10.95 )))
- []
-
-[11
-
-] [12
-
-]
-Overfull \hbox (6.15166pt too wide) detected at line 459
-\OT1/mathkerncmss/m/sl/10.95 f[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 z[]\OT1/cmss/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^@ \OT1/mathkerncmss/m/sl/10.95 f[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 z[] \OMS/cmsy/m/n/10.95 n f\OT1/mathkerncmss/m/sl/10.95 i\OMS/cmsy/m/n/10.95 g\OT1/cmss/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^U \OT1/mathkerncmss/m/sl/10.95 f[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 z[]\OT1/cmss/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^@ \OT1/mathkerncmss/m/sl/10.95 f[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 z[] \OMS/cmsy/m/n/10.95 n f\OT1/mathkerncmss/m/sl/10.95 i\OMS/cmsy/m/n/10.95 g\OT1/cmss/m/n/10.95 )  =[]\OMS/cmsy/m/n/10.95 )  \OML/cmm/m/it/10.95 ^^^[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 f[]\OML/cmm/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 x\OT1/cmss/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^U \OML/cmm/m/it/10.95 ^^^[]\OT1/cmss/m/n/10.95 (\OT1/mathkerncmss/m/sl/10.95 f[]\OML/cmm/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 x\OT1/cmss/m/n/10.95 )
- []
-
-[13
-
-] [14
-
-] [15
-
-] [16
-
-] [17
-
-] [18
-
-] [19
-
-] [20
-
-]
+ <C:/Users/aless/AppData/Local/Programs/MiKTeX/tex/latex/beamer/beamericonarticle.pdf>]
 \tf@nav=\write6
 \openout6 = `Seminar.nav'.
 
@@ -1162,31 +1127,22 @@ Overfull \hbox (6.15166pt too wide) detected at line 459
 \tf@snm=\write8
 \openout8 = `Seminar.snm'.
 
- [21] (Seminar.aux)
-
-LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
-
-
-Package rerunfilecheck Warning: File `Seminar.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Seminar.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  1F0D22342B0143F324AE5E592649BE30;682.
+ (Seminar.aux)
+Package rerunfilecheck Info: File `Seminar.out' has not changed.
+(rerunfilecheck)             Checksum: 535270E7CC3AD4E6703C024AE60ADC93;93.
  ) 
 Here is how much of TeX's memory you used:
- 32987 strings out of 478582
- 661282 string characters out of 2844344
- 932381 words of memory out of 3000000
- 50446 multiletter control sequences out of 15000+600000
- 487707 words of font info for 75 fonts, out of 8000000 for 9000
+ 33091 strings out of 478582
+ 664432 string characters out of 2844344
+ 932633 words of memory out of 3000000
+ 50559 multiletter control sequences out of 15000+600000
+ 486932 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,19n,122p,446b,731s stack positions out of 10000i,1000n,20000p,200000b,80000s
- <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss2488.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0600.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Seminar.pdf (21 pages, 313447 bytes).
+ 128i,19n,122p,446b,714s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss2488.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0600.pk><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Seminar.pdf (9 pages, 210973 bytes).
 PDF statistics:
- 893 PDF objects out of 1000 (max. 8388607)
- 44 named destinations out of 1000 (max. 500000)
- 157 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 549 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
+ 123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

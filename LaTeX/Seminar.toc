@@ -1,4 +1,2 @@
 \babel@toc {english}{}\relax 
-\beamer@sectionintoc {1}{Interpretability of neural network calibration}{3}{0}{1}
-\beamer@sectionintoc {2}{Calibration of the Heston Model}{15}{0}{2}
-\beamer@sectionintoc {3}{Data processing and results}{19}{0}{3}
+\beamer@sectionintoc {1}{Background}{3}{0}{1}
