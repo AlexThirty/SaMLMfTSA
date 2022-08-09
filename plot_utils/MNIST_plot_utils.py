@@ -24,6 +24,29 @@ def plot_ten_images(X_corr, X):
         bx.get_yaxis().set_visible(False)
     plt.show()
     
+def save_ten_images(X_corr, X, filename, title):
+    n=10
+    plt.figure(figsize=(20, 4))
+    plt.title(title)
+    for i in range(n):
+
+        # display original + noise
+        ax = plt.subplot(2, n, i + 1)
+        plt.title("original + noise")
+        plt.imshow(tf.squeeze(X_corr[i]))
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+
+        # display reconstruction
+        bx = plt.subplot(2, n, i + n + 1)
+        plt.title("reconstructed")
+        plt.imshow(tf.squeeze(X[i]))
+        plt.gray()
+        bx.get_xaxis().set_visible(False)
+        bx.get_yaxis().set_visible(False)
+    plt.savefig(filename, bbox_inches='tight')
+    
     
 def scale_to_unit_interval(ndar, eps=1e-8):
     """ Scales all values in the ndarray ndar to be between 0 and 1 """
