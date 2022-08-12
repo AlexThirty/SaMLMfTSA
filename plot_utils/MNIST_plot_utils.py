@@ -45,7 +45,7 @@ def save_ten_images(X_corr, X, filename, title):
         plt.gray()
         bx.get_xaxis().set_visible(False)
         bx.get_yaxis().set_visible(False)
-    plt.savefig(filename, bbox_inches='tight')
+    plt.savefig(filename)
     
     
 def scale_to_unit_interval(ndar, eps=1e-8):

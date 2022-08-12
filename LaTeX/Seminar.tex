@@ -204,7 +204,7 @@
 %\newcommand{\sobloc}[3]{W_{\text{loc}}^{#1, #2}(#3)}
 \newcommand{\weakconv}{\rightharpoonup}
 \newcommand{\weakconvs}{\overset{\ast}{\rightharpoonup}}
-
+\newcommand{\prox}{\text{prox}}
 
 
 \newcommand{\dx}{\text{d}x}
@@ -387,6 +387,168 @@
 	\end{itemize}
 \end{frame}
 
+\section{Robust Deep Autoencoders}
+
+\begin{frame}
+	\frametitle{Robust Deep Autoencoders}
+	\begin{itemize}
+		\item The main idea behind Robust Deep Autoencoders (RDAE) is to combine the representation learning of DAEs and the anomaly detection capability of RPCA.
+		\item Noise and outliers are incompressible in the lower dimensional space we want to represent our data in.
+		\item The objective is to learn a good low dimensional representation except for few exceptions.
+		\item We will see two RDAE typed, one for $l_1$ regularization and one for $l_{2,1}$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{RDAE with $l_1$ regularization}
+	\begin{itemize}
+		\item The RDAE objective is to decompose data $X=L_D+S$ just as in RPCA.
+		\item By removing the noise $S$ the autoencoder can better reconstruct $L_D$.
+		\item As before, the best choice to obtain a sparse $S$ would be to use a loss of the type $\norm{S}_0$ which counts the non-zero entries, solving the problem
+			\begin{align}
+				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S}_0}\\
+				\text{s.t. }X-L_D-S=0  
+			\end{align}
+		\item The parameter $\lambda$ controls the sparsity of $S$ and plays an essential role.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The role of $\lambda$}
+	\begin{itemize}
+		\item As we said, the role of $\lambda$ is very important.
+		\item A smaller $\lambda$ means that the norm of $S$ plays a less important role and much of the loss will come from the DAE.
+		\item The model will reconstruct better but recognize less outliers. This could be helpful if we want a more faithful representation e.g. for supervised tasks.
+		\item A larger $\lambda$, instead, gives more importance to the norm of $S$ as a loss.
+		\item This means that the model will recognize more (or even too much) outliers, sacrificing some reconstruction performance.
+	\end{itemize}
+\end{frame}
+
+	
+\begin{frame}
+	\frametitle{The true objective}
+	\begin{itemize}
+		\item As for the RPCA the previous loss is non tractable. We then instead focus on the following problem:
+			\begin{align}
+				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S}_1}\\
+				\text{s.t. }X-L_D-S=0  
+			\end{align}
+			Notice two things:
+		\item The autoencoder is trained with $L_D$, the part of its decomposition assumed to be outliers and noise free.
+		\item There is no specific requirement about the DAE, in fact $D_{\theta}$ and $E_{\theta}$ are generic decoder, encoder functions.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{RDAE with $l_{2,1}$ regularization}
+	\begin{itemize}
+		\item The RDAE with $l_1$ penalization assumes that outliers and noise are not structured. The $l_1$ penalty is indeed just a regularization to induce sparsity.
+		\item In general we can have multiple types of errors: an instrument that corrupts an input feature or outliers where the input data is in some way structurally different from normal data.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\centering
+	\includegraphics[width=0.9\linewidth]{Images/diff_anomalies.png}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The $l_{2,1}$ norm}
+	\begin{itemize}
+		\item The $l_{2,1}$ norm is defined as ($X\in \R^{N\times n}$):
+			\begin{equation}
+				\norm{X}_{2,1} = \sum_{j=1}^{n}{\norm{X_j}_{2}} = \sum_{j=1}^{n}{\left(\sum_{i=1}^{N}|X_{ij}|^{2}\right)^{\frac{1}{2}}}
+			\end{equation}
+		\item The $l_{2,1}$ norm can be seen as introducting a $l_2$ norm regularization over each feature and then adding a $l_1$ regularization accross features.
+		\item We can also do the other way around: to recognize data anomalies (by row) just apply the $l_{2,1}$ norm to $X^T$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item The final optimization problem for the RDAE with $l_{2,1}$ regularization for data anomalies is then
+			\begin{align}
+				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S^T}_{2,1}}\\
+				\text{s.t. }X-L_D-S=0  
+			\end{align}
+		\item For detecting feature anomalies we just need to change the objective to
+			\begin{align}
+				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S}_{2,1}}\\
+				\text{s.t. }X-L_D-S=0  
+			\end{align}
+	\end{itemize}
+\end{frame}
+
+\section{RDAE training}
+
+\begin{frame}
+	\frametitle{The proximal operator}
+	\begin{itemize}
+		\item To see in detail the training procedure for the RDAE we first need to consider the proximal operator.
+		\item For general optimization problems of the form $\min f(x)+\lambda g(x)$ where $g$ is convex some of the most used methods require to find
+			\begin{equation}
+				\prox_{\lambda, g}(x) = \argmin_{y}{g(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}
+			\end{equation}
+		\item In this case we then want to obtain a solution of the problems
+			\begin{align}
+				\prox_{\lambda, l_1}(x) = \argmin_{y}{l_1(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}\\
+				\prox_{\lambda, l_{2,1}}(x) = \argmin_{y}{l_{2,1}(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}
+			\end{align}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item For the $l_1$ norm, the solution to the proximal problem is
+			\begin{equation}
+				\prox_{\lambda, l_1}(x) = \begin{cases}
+					x_i - \lambda, & x_i>\lambda\\
+					x_i + \lambda, & x_i<-\lambda\\
+					0, & x_i\in[-\lambda, \lambda]
+				\end{cases}
+			\end{equation}
+			which in the case of $S\in\R^{N\times n}$ gets applied element by element.
+		\item For the $l_{2,1}$ norm, we obtain (let $S_{\cdot j}$ be the column vector $S_{ij}, j=1, \ldots, N$)
+			\begin{equation}
+				(\prox_{\lambda, l_{2,1}}(S))_{ij} = \begin{cases}
+					S_{ij}-S_{ij} - \lambda\frac{S_{ij}}{\norm{S_{\cdot j}}_{2}}, & \norm{S_{\cdot j}}_{2} > \lambda\\
+					0, & \norm{S_{\cdot j}}_{2} \leq \lambda
+				\end{cases}
+			\end{equation}
+			if we are considering feature wise anomalies, substitute $S$ with $S^T$ for data anomalies.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The main algorithm}
+	\begin{itemize}
+		\item The method used to train the RDAE is the Alternating Direction Method of Multipliers (ADMM).
+		\item The main idea is to optimize the problem
+			\begin{align}
+				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S^T}_{2,1}}\\
+				\text{s.t. }X-L_D-S=0  
+			\end{align}
+			by doing it in two steps at each iteration.
+		\item First, we fix $S$ and optimize the DAE loss $\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2$ with backpropagation as usual.
+		\item Then, we fix $L_D$ and optimize the regularization term with the proximal method.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	The full procedure is the following: given input $X\in \R^{N\times n}$, initialize $L_D\in \R^{N\times n}, S\in \R^{N\times n}$ as zero matrices, 
+	$L_S = X$ and initialize the DAE randomly. For each iteration do:
+	\begin{itemize}
+		\item $L_D = X - S$
+		\item Minimize $\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2$ with backpropagation.
+		\item Set $L_D = D(E(L_D))$ as the reconstruction.
+		\item Set $S = X - L_D$.
+		\item Optimize $S$ using a $\prox_{\lambda, l_{\cdot}}$ function of choice.
+		\item If $c_1 = \frac{\norm{X-L_D-S}_2}{\norm{X}_2} < \epsilon$ or $sc_2 = \frac{\norm{LS-L_D-S}_2}{\norm{X}_2} < \epsilon$ we have early convergence.
+		\item Set $L_S = L_D + S$.
+	\end{itemize}
+	Return $L_D$ and $S$.
+\end{frame}
+
 \begin{frame}
 \centering{\hyperref{https://github.com/AlexThirty/SaMLMfTSA}{}{}{https://github.com/AlexThirty/SaMLMfTSA}}
 	\Huge{\centerline{Thank you!}} 
@@ -395,6 +557,7 @@
 \nocite{RAE}
 \nocite{DATA}
 \nocite{RPCA}
+\nocite{PROX}
 
 \bibliographystyle{alpha}
 \bibliography{Bibliography}
