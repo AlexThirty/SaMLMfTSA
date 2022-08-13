@@ -323,7 +323,7 @@
 	\begin{itemize}
 		\item A Deep Autoencoder (DAE) is constituted by two main components: an encoder $E$ and a Decoder $D$.
 		\item The main objective of a DAE is to learn the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$.
-		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coding space. Usually they are Deep Neural Networks e.g. a feed forward network or even more complex models such as Long ShortTer Memory (LSTM).
+		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coded space. Usually they are Deep Neural Networks e.g. FCNN complex models such as Long Short Term Memory (LSTM).
 		\item The objective is usually to find the minimum reconstruction error w.r.t. some parametrized encoding and decoding functions and a distance (in this case the $L_2$ norm)
 			\begin{equation}
 				\min_{\theta, \phi}{\norm{X-D_{\theta}(E_{\phi}(X))}_{2}}
@@ -555,8 +555,91 @@
 	\frametitle{Results}
 	\begin{itemize}
 		\item I tried to reproduce some of the results by the original article.
-		\item 
+		\item For the main article results the database used was the MNIST digits database.
+		\item The train data contains $50000$ samples while the test set contins $10000$ images.
+		\item Data was flattened from images of shape $(28,28,1)$ into vectors of length $784$. Train data is then a matrix in $\R^{50000\times 784}$.
+		\item Pixel walues are converted from integers between $0$ and $255$ to floats between $0$ and $1$.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementation}
+	\begin{itemize}
+		\item The RDAE and the standard DAEs used in this experimental tries were implemented using Tensorflow $2.9.1$ on python $3.8$.
+		\item For the random forest classifier and the isolation forest models were taken from SciKit-learn version $1.1.1$.
+		\item \textcolor{blue}{Capire se mettere implementazione o no}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$l_1$ Robust Deep Autoencoder}
+	\begin{itemize}
+		\item To assess the performance of the $l_1$ RDAE the proposed procedure is the following:
+		\item The training images get corrupted with a percentage of pixel (from $5\%$ to $50\%$) changed to a random value between $0$ and $1$.
+		\item Both the RDAE with $l_1$ regularization and a standard DAE (with same architecture as the DAE from the RDAE) are trained on these corrupted images.
+		\item A random forest classifier is then trained on the feature extracted at the bottomneck layers of the two models.
+		\item We test how these RF classifiers perform on the test set.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item This let us see how well the model is able to extract the important features of the images in a meaningful way.
+		\item In this case the RDAE and DAE need to denoise the images and recognize which charactheristics are improtant.
+		\item Both architectures are simple FCNN with layers of size $784$ (input), $200$ and $10$ (the bottleneck and hidden feature layer).
+		\item \textcolor{blue}{specificare parametri finali}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\textcolor{blue}{INSERIRE RISULTATI E COMMENTI}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{$l_{2,1}$ Robust Deep Autoencoder}
+	\begin{itemize}
+		\item The anomaly detection experiment is based on the recognizing of a specific digit of the MNIST dataset.
+		\item First all the $4$ digit images in the training set are collected in our dataset.
+		\item Then, some images are chose at random from all the other digits until they are around $5\%$ of total images in the dataset.
+		\item This will be considered as the outliers of our data.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item The $l_{2,1}$ RDAE is trained on this dataset without any side information.
+		\item Without telling the model which images are $4$ digits and which are outliers the model itself must recognize the latters from original data on his own.
+		\item The model architecture is the same as for the $l_1$ RDAE experiment.
+		\item The only parameter that is fine tuned is the 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item Model performance is assessed by seeing how it is able to recognize the correct "outliers".
+		\item The metrics used are the accuracy, the precision score, the recall score and the F1 score defined down below.
+			\begin{align}
+				ACC = \frac{TP+TN}{P+N}\;\;\; P = \frac{TP}{TP+FP}\\
+				R = \frac{TP}{TP+FN} \;\;\; F1 = 2\frac{P\cdot R}{P+R}
+			\end{align}
+		\item The F1 score, which tries to average in some way precision and recall, is the metrics used to select the $\lambda$ parameter.
+		\item $\lambda$ is the only parameter that is fine tuned (in a semi-supervised way).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item The performance of the RDAE as outlied detector is compared with the one obtained using the isolation forest method.
+		\item The isolation forest method was a SOTA method for outlied detection. It is based on the idea that outliers are few and different and are separated from the rest.
+		\item These outliers gets recognized using isolation trees which try to separate points from others.
+		\item The only parameter which is peculiar to the method and which gets selected with the same metrics is the outlier fraction.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\textcolor{blue}{INSERIRE COMMENTI E RISULTATI +  EVENTUALE PARTE SU LSTM}
 \end{frame}
 
 \begin{frame}
