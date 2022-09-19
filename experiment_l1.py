@@ -1,5 +1,6 @@
 # %%
 from multiprocessing import Pool, cpu_count
+#from random import shuffle
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -15,6 +16,8 @@ from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Model
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
 from plot_utils.MNIST_plot_utils import scale_to_unit_interval, save_ten_images, plot_ten_images, tile_raster_images
 from plot_utils.ts_plot_utils import plot_ts, plot_ts_recon, save_ts, save_ts_recon
@@ -324,7 +327,7 @@ DAE_mnist.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=3e-4), loss='
 # ### The hidden layer quality experiment
 
 # %%
-lambda_l1_list = [0.05, 0.1, 0.2, 0.5, 1., 2., 5., 10., 20., 50., 100.]
+lambda_l1_list = [0.1, 0.5, 1., 2., 5., 10., 20., 50., 100., 200., 500.]
 #lambda_l1_list = [0.05, 1., 5.]
 lambda_l1_len = len(lambda_l1_list)
 corr_l1_list = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.40, 0.45, 0.5]
@@ -339,12 +342,13 @@ l1_DAE_results_corr = np.zeros(shape=(lambda_l1_len, lambda_l1_len))
 l1_performance_corr = np.zeros(shape=(lambda_l1_len, corr_l1_len))
 
 
-dense_units = [200, 10]
+dense_units = [200, 50]
+#dense_units = [250, 100]
 lr = 3e-4
-train_iter = 20
-AE_train_iter = 25
+train_iter = 10
+AE_train_iter = 50
 epochs = 100
-batch_size = 128
+batch_size = 256
 eps=1e-8
 
 curr_dir = os.getcwd()
@@ -376,33 +380,34 @@ for j, corr_perc in enumerate(corr_l1_list):
     # Define the two models
     DAE_mnist_exp = DAE_Dense(input_size=input_size, dense_units=dense_units)
     DAE_mnist_exp.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=lr), loss='mse', metrics=['mse'])
-    
-    print('Training DAE')
-    DAE_mnist.fit(x=x_train_corr, epochs=epochs, batch_size=batch_size, verbose=0)
-    DAE_mnist_recon = DAE_mnist(x_train_corr).numpy()
+
     
     for i, lam in enumerate(lambda_l1_list):
         print(f'lam: {lam}, corruption: {corr_perc}')
-        folder = os.path.join(curr_dir, 'l1_experiment', 'lam'+str(lam)+'corr'+str(corr_perc))
+        folder = os.path.join(curr_dir, 'l1_experiment_correct_more_hidden', 'lam'+str(lam)+'corr'+str(corr_perc))
         mkdir_p(folder)
         
         x_train_corr = x_train_corr.reshape((x_train_corr.shape[0], 784))
+        x_train_prov = x_train_corr.copy()
+        y_train_prov = y_train.copy()
+        x_train_prov, y_train_prov = shuffle(x_train_prov, y_train_prov)
         RAEl1Dense_exp = RobustAutoencoder(AE_type='Dense', prox_type='l1', input_size=input_size, dense_units=dense_units, lr=lr)
         
+        print('Training DAE')
+        DAE_mnist.fit(x=x_train_prov, epochs=epochs, batch_size=batch_size, verbose=0)
+        DAE_mnist_recon = DAE_mnist(x_train_prov).numpy()
+
         print('Training RAE')
-        RAE_mnist_recon, RAE_mnist_noise = RAEl1Dense_exp.train_and_fit(X=x_train_corr, train_iter=train_iter, AE_train_iter=AE_train_iter,
+        RAE_mnist_recon, RAE_mnist_noise = RAEl1Dense_exp.train_and_fit(X=x_train_prov, train_iter=train_iter, AE_train_iter=AE_train_iter,
                                                             batch_size=batch_size, eps=eps, lam=lam, verbose=0)
 
         
-        DAE_train_encoding = DAE_mnist.encode(x_train).numpy()
-        RAE_train_encoding = RAEl1Dense_exp.AE.encode(x_train).numpy()
-        DAE_test_encoding = DAE_mnist.encode(x_test).numpy()
-        RAE_test_encoding = RAEl1Dense_exp.AE.encode(x_test).numpy()
+        rf_x_train, rf_x_test, rf_LD_train, rf_LD_test, rf_y_train, rf_y_test = train_test_split(x_train_prov, RAE_mnist_recon, y_train_prov, test_size=1/3., random_state=seed)
 
-        DAE_train_encoding_corr = DAE_mnist.encode(x_train_corr).numpy()
-        RAE_train_encoding_corr = RAEl1Dense_exp.AE.encode(x_train_corr).numpy()
-        DAE_test_encoding_corr = DAE_mnist.encode(x_test_corr).numpy()
-        RAE_test_encoding_corr = RAEl1Dense_exp.AE.encode(x_test_corr).numpy()
+        DAE_train_encoding = DAE_mnist.encode(rf_x_train).numpy()
+        RAE_train_encoding = RAEl1Dense_exp.AE.encode(rf_LD_train).numpy()
+        DAE_test_encoding = DAE_mnist.encode(rf_x_test).numpy()
+        RAE_test_encoding = RAEl1Dense_exp.AE.encode(rf_LD_test).numpy()
         
         rfc_DAE = RandomForestClassifier(random_state=seed)
         rfc_RAE = RandomForestClassifier(random_state=seed)
@@ -411,33 +416,19 @@ for j, corr_perc in enumerate(corr_l1_list):
         rfc_RAE_corr = RandomForestClassifier(random_state=seed)
         
         print('Training RF')
-        rfc_DAE.fit(X=DAE_train_encoding, y=y_train)
-        rfc_RAE.fit(X=RAE_train_encoding, y=y_train)
-
-        rfc_DAE_corr.fit(X=DAE_train_encoding_corr, y=y_train)
-        rfc_RAE_corr.fit(X=RAE_train_encoding_corr, y=y_train)
+        rfc_DAE.fit(X=DAE_train_encoding, y=rf_y_train)
+        rfc_RAE.fit(X=RAE_train_encoding, y=rf_y_train)
         
         DAE_predict = rfc_DAE.predict(X=DAE_test_encoding)
         RAE_predict = rfc_RAE.predict(X=RAE_test_encoding)
-
-        DAE_predict_corr = rfc_DAE_corr.predict(X=DAE_test_encoding_corr)
-        RAE_predict_corr = rfc_RAE_corr.predict(X=RAE_test_encoding_corr)
         
-        DAE_acc = accuracy_score(y_pred=DAE_predict, y_true=y_test)
-        RAE_acc = accuracy_score(y_pred=RAE_predict, y_true=y_test)
+        DAE_acc = accuracy_score(y_pred=DAE_predict, y_true=rf_y_test)
+        RAE_acc = accuracy_score(y_pred=RAE_predict, y_true=rf_y_test)
         performance = (RAE_acc - DAE_acc) / DAE_acc
-
-        DAE_acc_corr = accuracy_score(y_pred=DAE_predict_corr, y_true=y_test)
-        RAE_acc_corr = accuracy_score(y_pred=RAE_predict_corr, y_true=y_test)
-        performance_corr = (RAE_acc_corr - DAE_acc_corr) / DAE_acc_corr
         
         l1_DAE_results[i,j] = DAE_acc
         l1_RAE_results[i,j] = RAE_acc
         l1_performance[i,j] = performance
-
-        l1_DAE_results_corr[i,j] = DAE_acc_corr
-        l1_RAE_results_corr[i,j] = RAE_acc_corr
-        l1_performance_corr[i,j] = performance_corr
         
         x_train_corr = x_train_corr.reshape((x_train_corr.shape[0], 28, 28, 1))
         DAE_mnist_recon = DAE_mnist_recon.reshape((DAE_mnist_recon.shape[0], 28, 28, 1))
@@ -450,19 +441,10 @@ for j, corr_perc in enumerate(corr_l1_list):
         print(f'DAE accuracy: {DAE_acc}')
         print(f'RAE performance improvement: {performance}')
 
-        print(f'RAE accuracy on corrupted: {RAE_acc_corr}')
-        print(f'DAE accuracy on corrupted: {DAE_acc_corr}')
-        print(f'RAE performance improvement on corrupted: {performance_corr}')
-
         with open(os.path.join(folder, 'result.txt'), 'w') as f:
             print(f'RAE accuracy: {RAE_acc}', file=f)
             print(f'DAE accuracy: {DAE_acc}', file=f)
             print(f'RAE performance improvement: {performance}', file=f)
-
-            print(f'RAE accuracy on corrupted: {RAE_acc_corr}', file=f)
-            print(f'DAE accuracy on corrupted: {DAE_acc_corr}', file=f)
-            print(f'RAE performance improvement on corrupted: {performance_corr}', file=f)
-        
 
 # %%
 fig, ax = plt.subplots()
@@ -472,7 +454,7 @@ im, cbar = heatmap(l1_performance, lambda_l1_list, corr_l1_list, ax=ax,
 texts = annotate_heatmap(im, valfmt="{x:.2f}")
 fig.tight_layout()
 plt.show()
-plt.savefig(os.path.join(curr_dir, 'l1_experiment', 'performance.png'))
+plt.savefig(os.path.join(curr_dir, 'l1_experiment_correct', 'performance.png'))
 
 fig, ax = plt.subplots()
 plt.title('DAE accuracy')
@@ -481,7 +463,7 @@ im, cbar = heatmap(l1_DAE_results, lambda_l1_list, corr_l1_list, ax=ax,
 texts = annotate_heatmap(im, valfmt="{x:.2f}")
 fig.tight_layout()
 plt.show()
-plt.savefig(os.path.join(curr_dir, 'l1_experiment', 'DAE_acc.png'))
+plt.savefig(os.path.join(curr_dir, 'l1_experiment_correct', 'DAE_acc.png'))
 
 fig, ax = plt.subplots()
 plt.title('RAE accuracy')
@@ -490,4 +472,4 @@ im, cbar = heatmap(l1_RAE_results, lambda_l1_list, corr_l1_list, ax=ax,
 texts = annotate_heatmap(im, valfmt="{x:.2f}")
 fig.tight_layout()
 plt.show()
-plt.savefig(os.path.join(curr_dir, 'l1_experiment', 'RAE_acc.png'))
+plt.savefig(os.path.join(curr_dir, 'l1_experiment_correct', 'RAE_acc.png'))
