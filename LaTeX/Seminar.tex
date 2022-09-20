@@ -110,7 +110,6 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
-
 % Default fixed font does not support bold face
 \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
 \DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
@@ -543,7 +542,7 @@
 		\item Set $L_D = D(E(L_D))$ as the reconstruction.
 		\item Set $S = X - L_D$.
 		\item Optimize $S$ using a $\prox_{\lambda, l_{\cdot}}$ function of choice.
-		\item If $c_1 = \frac{\norm{X-L_D-S}_2}{\norm{X}_2} < \epsilon$ or $sc_2 = \frac{\norm{LS-L_D-S}_2}{\norm{X}_2} < \epsilon$ we have early convergence.
+		\item If $c_1 = \frac{\norm{X-L_D-S}_2}{\norm{X}_2} < \epsilon$ or $c_2 = \frac{\norm{LS-L_D-S}_2}{\norm{X}_2} < \epsilon$ we have early convergence.
 		\item Set $L_S = L_D + S$.
 	\end{itemize}
 	Return $L_D$ and $S$.
@@ -567,7 +566,7 @@
 	\begin{itemize}
 		\item The RDAE and the standard DAEs used in this experimental tries were implemented using Tensorflow $2.9.1$ on python $3.8$.
 		\item For the random forest classifier and the isolation forest models were taken from SciKit-learn version $1.1.1$.
-		\item \textcolor{blue}{Capire se mettere implementazione o no}
+		\item Full implementation and details can be found on \hyperref{https://github.com/AlexThirty/SaMLMfTSA}{}{}{GitHub}
 	\end{itemize}
 \end{frame}
 
@@ -592,6 +591,26 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{$L_1$ RDAE analysis}
+	\begin{itemize}
+		\item Unfortunately, I could not replicate the results by the article.
+		\item I tried with different values for the parameters and different setups.
+		\item In any case, the $L_1$ RDAE performance was really similar to the performance of a simple Deep Autoencoder, in some cases worse.
+		\item This is not to say that the RDAE has a poor performance, as we will see it can have some better reconstructions with corrupted data.
+		\item The simpler approach seems to work better for supervised task with the hidden layer.
+		\item The article was written when Tensorflow and other libraries were still in progress. It could also be that recent improvements benefit the DAE performance.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Original results}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Images/original_l1.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
 	\textcolor{blue}{INSERIRE RISULTATI E COMMENTI}
 \end{frame}
 
@@ -612,7 +631,7 @@
 		\item The $l_{2,1}$ RDAE is trained on this dataset without any side information.
 		\item Without telling the model which images are $4$ digits and which are outliers the model itself must recognize the latters from original data on his own.
 		\item The model architecture is the same as for the $l_1$ RDAE experiment.
-		\item The only parameter that is fine tuned is the 
+		\item The only parameter that requires tuning is $\lambda$.
 	\end{itemize}
 \end{frame}
 
@@ -630,16 +649,395 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Original performance}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/l21_perf_article.png}
+		\caption[]{$L_{2,1}$ RDAE anomaly detection performance from original article}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Anomaly detection performance}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Images/l21_experiment_from_0.1_to_10.1.jpg}
+		\caption[]{$L_{2,1}$ RDAE anomaly detection performance. $\lambda$ from $2$ to $8$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Anomaly detection performance}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Images/l21_experiment_from_5.0_to_6.0.jpg}
+		\caption[]{$L_{2,1}$ RDAE anomaly detection performance. $\lambda$ from $5$ to $6$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Anomaly detection performance}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Images/l21_experiment_from_5.4_to_5.6.jpg}
+		\caption[]{$L_{2,1}$ RDAE anomaly detection performance. $\lambda$ from $5.4$ to $5.6$}
+	\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
 	\begin{itemize}
-		\item The performance of the RDAE as outlied detector is compared with the one obtained using the isolation forest method.
-		\item The isolation forest method was a SOTA method for outlied detection. It is based on the idea that outliers are few and different and are separated from the rest.
-		\item These outliers gets recognized using isolation trees which try to separate points from others.
-		\item The only parameter which is peculiar to the method and which gets selected with the same metrics is the outlier fraction.
+		\item The maximum performance is obtained with $\lambda=5.468$ with an $F_1$ score of $0.668$.
+		\item Focusing on all values from $\lambda=5$ to $\lambda=6$ the RDAE has an accuracy of over $95\%$ in recognizing anomalies. The $F_1$ score in this range is almost everytime above $0.55$.
+		\item The $F_1$ score is almost everytime above $0.6$ for $\lambda$ in the $[5.4, 5.6]$ range.
+		\item Best result obtained by the authors is an $F_1$ score of $0.64$ for $\lambda=0.00065$. This different value of $\lambda$ is in my opinion due to the different parameters of the neural network.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item We are now going to have a look at the final and reconstructed images obtained from the RDAE.
+		\item For each value of $\lambda$ we have $3$ main images to look at: the reconstructionof the original images from the DAE in the RDAE, the final $L_D$ image (the "clean" version, in this case it should only contain $4$s) and the $S$ image, which should be non empty only for outliers.
+		\item We look $3$ different values for $\lambda$: the best one identified above, $8.0$ which adds too much penalization with few outliers identified and $4.0$ which is a low value and a lot of $4$s are considered outliers.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\textcolor{blue}{INSERIRE COMMENTI E RISULTATI +  EVENTUALE PARTE SU LSTM}
+	\frametitle{Original Images data}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{Images/original_l21.png}
+		\caption[]{Original images for the $L_{2,1}$ RDAE}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{$\lambda=5.468$}
+	\begin{figure}
+		\centering
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21R_5.468.png}
+			\caption{Reconstruction}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21L_5.468.png}
+			\caption{Cleaned data}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21S_5.468.png}
+			\caption{Outliers detection}
+		\end{subfigure}
+		   \caption{Accuracy: $0.970$, precision: $0.722$, recall: $0.621$, F1 score: $0.668$}
+   \end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$\lambda=8.0$}
+	\begin{figure}
+		\centering
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21R_8.png}
+			\caption{Reconstruction}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21L_8.png}
+			\caption{Cleaned data}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21S_8.png}
+			\caption{Outliers detection}
+		\end{subfigure}
+		   \caption{Accuracy: $0.953$, precision: $1.00$, recall: $0.0386$, F1 score: $0.0743$}
+   \end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$\lambda=4.0$}
+	\begin{figure}
+		\centering
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21R_4.png}
+			\caption{Reconstruction}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21L_4.png}
+			\caption{Cleaned data}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{Images/l21S_4.png}
+			\caption{Outliers detection}
+		\end{subfigure}
+		   \caption{Accuracy: $0.788$, precision: $0.167$, recall: $0.839$, F1 score: $0.278$}
+   \end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item The performance of the RDAE as outlied detector is compared with the one obtained using the isolation forest method.
+		\item The isolation forest method was a SOTA method for outlied detection. It is based on the idea that outliers are few and different and are separated from the rest.
+		\item These outliers gets recognized using isolation trees which try to separate points from others.
+		\item The only parameter which is peculiar to the method and which gets selected with the same metrics is the outlier fraction (from $0$ to $0.5$)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Isolation forest performance}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Images/isolation_forest.jpg}
+		\caption[]{Isolation forest performance}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item The best isolation forest performance is $0.41$ with the outlier fraction set to the value of $0.06$ (which is really close to the outlier true fraction of $5\%$).
+		\item This result is really close to the original article. The authors obtained a best $F_1$ score of $0.37$ with $0.11$ outlier fraction.
+		\item The little difference is in my opinion related to the different datasets but they are comparable.
+		\item In each case the performance by isolation forest is far worse than the RDAE.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Time series experiment}
+	\begin{itemize}
+		\item I tried to apply this method to time series, on which we focused in this course.
+		\item In this case we are going to use a dataset from the Numenta Anomaly Benchmark \hyperref{https://github.com/numenta/NAB/tree/master/data}{}{}{(NAB)}. The database is called machine temperature system failure.
+		\item It is the sensor data of an internal component of a large, industrial mahcine. It should have $3$ anomalies: the first anomaly is a planned shutdown of the machine. The second anomaly is difficult to detect and directly led to the third anomaly, a catastrophic failure of the machine.
+		\item Data has $22464$ timesteps in total. I chose to consider subsequences of length $144$. The final dataset has then $22321$ training time series.
+		\item Data is normalized all togheter to be in $(0,1)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{RDAE architectures}
+	I tried using two architectures for the autoencoder part in the RDAE.
+	\begin{itemize}
+		\item The first one is a Dense Neural Network with hidden layers of $60$ and $20$. It is trained for $20$ outer iterations and $50$ inner iterations for the autoencoder, a batch size of $256$ , $\epsilon=10^{-8}$.
+		\item The second one is a LSTM with two layers of $32$ and $16$ units, $10$ outer iterations and $25$ inner iterations with same batch size as before. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Analysis}
+	\begin{itemize}
+		\item Since data is unlabeled we don't have a clear benchmark for finding the correct value for $\lambda$.
+		\item I tried different values for $\lambda$ until the number of anomalies detected is nor too high nor too low.
+		\item For each architecture I picked some random anomalies and non-anomalies, to show how the RDAE is acting on time series and to have a look at what kind of anomalies it detectes.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Anomalies found}
+	\begin{table}[width=\linewidth]
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		\textbf{$\lambda$} & \textbf{$0.1$} & \textbf{$0.5$} & \textbf{$0.7$} & \textbf{$1.0$}  & \textbf{$2.0$} & \textbf{$3.0$} & \textbf{$3.2$} & \textbf{$3.3$} & \textbf{$3.5$}\\ \hline
+		\textbf{Dense} & All       & $751$          & $250$          & $14$     & $0$            & $0$            & $0$            & $0$            & $0$ \\ \hline
+		\textbf{LSTM}  & All        & $7525$         & $4208$         & $2068$  & $306$          & $109$          & $74$           & $9$            & $0$ \\ \hline
+		\end{tabular}
+		\caption[]{Anomalies found by the two architecures w.r.t. $\lambda$}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_non_anomaly3907.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_non_anomaly5199.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_non_anomaly12235.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomaly9830.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomalyzoom9830.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomaly16519.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomalyzoom16519.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomaly18313.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomalyzoom18313.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{itemize}
+		\item All of the anomalies found reach the $0$ value (min temperature of all time series).
+		\item Note that the different anomalies found DO NOT overlap. So each of the failures is only recognized once.
+		\item This may also create problems, since as you can see one failure is not recognized as anomaly.
+		\item In general, the reconstruction is a non-noisy version of the signal.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_non_anomaly4988.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_non_anomaly5460.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_non_anomaly13390.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomaly5105.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomalyzoom5105.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomaly5223.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomalyzoom5223.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomaly5436.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{LSTM RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomalyzoom5436.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{itemize}
+		\item All of the anomalies found reach the $0$ value (min temperature of all time series).
+		\item Also in this case different anomalies found DO NOT overlap. So each of the failures is only recognized once. In this case this happens at the beginning of the subsequence
+		\item The reconstruction here is far worse than in the dense case.
+		\item Performance could be improved using more parameters in the LSTM case. Note that computation time is much higher ($\sim 4$ minutes for dense, $\sim 20$ minutes for LSTM, with the help of a RTX3070 laptop).
+	\end{itemize}
 \end{frame}
 
 \begin{frame}

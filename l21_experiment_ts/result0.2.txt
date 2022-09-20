@@ -1,0 +1,6 @@
+Dense stats:
+Anomalies: 10093
+Non anomalies: 12228
+LSTM stats:
+Anomalies: 22321
+Non anomalies: 0
