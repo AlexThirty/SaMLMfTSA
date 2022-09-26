@@ -4,3 +4,6 @@ Non anomalies: 0
 LSTM stats:
 Anomalies: 22321
 Non anomalies: 0
+GRU stats:
+Anomalies: 22321
+Non anomalies: 0

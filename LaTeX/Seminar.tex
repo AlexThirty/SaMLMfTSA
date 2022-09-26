@@ -322,7 +322,7 @@
 	\begin{itemize}
 		\item A Deep Autoencoder (DAE) is constituted by two main components: an encoder $E$ and a Decoder $D$.
 		\item The main objective of a DAE is to learn the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$.
-		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coded space. Usually they are Deep Neural Networks e.g. FCNN complex models such as Long Short Term Memory (LSTM).
+		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coded space. Usually they are Deep Neural Networks e.g. FCNN complex models such as Long Short Term Memory (LSTM) or Gated Recurrent Units (GRU).
 		\item The objective is usually to find the minimum reconstruction error w.r.t. some parametrized encoding and decoding functions and a distance (in this case the $L_2$ norm)
 			\begin{equation}
 				\min_{\theta, \phi}{\norm{X-D_{\theta}(E_{\phi}(X))}_{2}}
@@ -586,7 +586,7 @@
 		\item This let us see how well the model is able to extract the important features of the images in a meaningful way.
 		\item In this case the RDAE and DAE need to denoise the images and recognize which charactheristics are improtant.
 		\item Both architectures are simple FCNN with layers of size $784$ (input), $200$ and $10$ (the bottleneck and hidden feature layer).
-		\item \textcolor{blue}{specificare parametri finali}
+		\item The RDAE was trained for $10$ outer iterations with $50$ inner iterations each, while the DAE was trained for $100$ epochs. The batch size is $256$.
 	\end{itemize}
 \end{frame}
 
@@ -611,7 +611,39 @@
 \end{frame}
 
 \begin{frame}
-	\textcolor{blue}{INSERIRE RISULTATI E COMMENTI}
+	\frametitle{Deep Autoencoder RF performance}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/DAE_acc.png}
+		\caption[]{Performance of the Random forest on the hidden layer of base Deep Autoencoder on different $\lambda$, corruption}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$l_1$ RDAE RF performance}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/RAE_acc.png}
+		\caption[]{Performance of the Random forest on the hidden layer of base $l_1$ RDAE on different $\lambda$, corruption}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Performance comparison}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/performance.png}
+		\caption[]{Performance increase of using RDAE on different $\lambda$, corruption}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Comments on performance}
+	\begin{itemize}
+		\item As we can see the RDAE performed worse in each case.
+		\item In general, the problem is not the RDAE which is not performing good enough.
+		\item It seems indeed that the basic DAE performs really good, even on highly corrupted data.
+	\end{itemize}
 \end{frame}
 
 
@@ -850,9 +882,10 @@
 	\begin{table}[width=\linewidth]
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 		\hline
-		\textbf{$\lambda$} & \textbf{$0.1$} & \textbf{$0.5$} & \textbf{$0.7$} & \textbf{$1.0$}  & \textbf{$2.0$} & \textbf{$3.0$} & \textbf{$3.2$} & \textbf{$3.3$} & \textbf{$3.5$}\\ \hline
+		\textbf{$\lambda$} & \textbf{$0.1$} & \textbf{$0.5$} & \textbf{$0.7$} & \textbf{$1.0$}  & \textbf{$2.0$} & \textbf{$3.0$} & \textbf{$3.2$} & \textbf{$3.3$} & \textbf{$4$}\\ \hline
 		\textbf{Dense} & All       & $751$          & $250$          & $14$     & $0$            & $0$            & $0$            & $0$            & $0$ \\ \hline
 		\textbf{LSTM}  & All        & $7525$         & $4208$         & $2068$  & $306$          & $109$          & $74$           & $9$            & $0$ \\ \hline
+		\textbf{GRU}  & All        & $7277$         & $4505$         & $2454$  & $331$          & $139$          & $103$           & $80$            & $0$ \\ \hline
 		\end{tabular}
 		\caption[]{Anomalies found by the two architecures w.r.t. $\lambda$}
 	\end{table}
@@ -1031,12 +1064,103 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Dense RDAE}
+	\frametitle{LSTM RDAE}
 	\begin{itemize}
 		\item All of the anomalies found reach the $0$ value (min temperature of all time series).
 		\item Also in this case different anomalies found DO NOT overlap. So each of the failures is only recognized once. In this case this happens at the beginning of the subsequence
 		\item The reconstruction here is far worse than in the dense case.
 		\item Performance could be improved using more parameters in the LSTM case. Note that computation time is much higher ($\sim 4$ minutes for dense, $\sim 20$ minutes for LSTM, with the help of a RTX3070 laptop).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_non_anomalyzoom14177.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_non_anomalyzoom15044.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_non_anomalyzoom15532.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomaly9700.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomalyzoom9700.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomaly10295.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomalyzoom10295.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomaly10305.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomalyzoom10305.jpg}
+		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GRU RDAE}
+	\begin{itemize}
+		\item In this case, not all of the anomalies found reach the $0$ value.
+		\item Also in this case different anomalies found DO NOT overlap. So each of the failures is only recognized once. With GRU this happens in different parts of the subsequence.
+		\item Also here the reconstruction is far worse than in the dense case.
+		\item Again we could increase parameters for better performance. Computation here required $\sim 12$ minutes with GPU.
 	\end{itemize}
 \end{frame}
 
