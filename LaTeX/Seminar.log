@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.9.20)  26 SEP 2022 22:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.9.20)  26 SEP 2022 22:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1206,7 +1206,7 @@ Package pdftex.def Info: Images/performance.png  used on input line 638.
 <Images/l21_perf_article.png, id=1094, 459.96844pt x 359.09157pt>
 File: Images/l21_perf_article.png Graphic file (type png)
 <use Images/l21_perf_article.png>
-Package pdftex.def Info: Images/l21_perf_article.png  used on input line 690.
+Package pdftex.def Info: Images/l21_perf_article.png  used on input line 740.
 (pdftex.def)             Requested size: 215.10196pt x 167.92924pt.
  [33
 
@@ -1214,7 +1214,7 @@ Package pdftex.def Info: Images/l21_perf_article.png  used on input line 690.
 <Images/l21_experiment_from_0.1_to_10.1.jpg, id=1128, 433.62pt x 289.08pt>
 File: Images/l21_experiment_from_0.1_to_10.1.jpg Graphic file (type jpg)
 <use Images/l21_experiment_from_0.1_to_10.1.jpg>
-Package pdftex.def Info: Images/l21_experiment_from_0.1_to_10.1.jpg  used on input line 699.
+Package pdftex.def Info: Images/l21_experiment_from_0.1_to_10.1.jpg  used on input line 749.
 (pdftex.def)             Requested size: 245.83282pt x 163.89069pt.
  [34
 
@@ -1222,7 +1222,7 @@ Package pdftex.def Info: Images/l21_experiment_from_0.1_to_10.1.jpg  used on inp
 <Images/l21_experiment_from_5.0_to_6.0.jpg, id=1160, 433.62pt x 289.08pt>
 File: Images/l21_experiment_from_5.0_to_6.0.jpg Graphic file (type jpg)
 <use Images/l21_experiment_from_5.0_to_6.0.jpg>
-Package pdftex.def Info: Images/l21_experiment_from_5.0_to_6.0.jpg  used on input line 708.
+Package pdftex.def Info: Images/l21_experiment_from_5.0_to_6.0.jpg  used on input line 758.
 (pdftex.def)             Requested size: 245.83282pt x 163.89069pt.
  [35
 
@@ -1230,7 +1230,7 @@ Package pdftex.def Info: Images/l21_experiment_from_5.0_to_6.0.jpg  used on inpu
 <Images/l21_experiment_from_5.4_to_5.6.jpg, id=1192, 433.62pt x 289.08pt>
 File: Images/l21_experiment_from_5.4_to_5.6.jpg Graphic file (type jpg)
 <use Images/l21_experiment_from_5.4_to_5.6.jpg>
-Package pdftex.def Info: Images/l21_experiment_from_5.4_to_5.6.jpg  used on input line 717.
+Package pdftex.def Info: Images/l21_experiment_from_5.4_to_5.6.jpg  used on input line 767.
 (pdftex.def)             Requested size: 245.83282pt x 163.89069pt.
  [36
 
@@ -1242,7 +1242,7 @@ Package pdftex.def Info: Images/l21_experiment_from_5.4_to_5.6.jpg  used on inpu
 <Images/original_l21.png, id=1287, 290.08376pt x 290.08376pt>
 File: Images/original_l21.png Graphic file (type png)
 <use Images/original_l21.png>
-Package pdftex.def Info: Images/original_l21.png  used on input line 746.
+Package pdftex.def Info: Images/original_l21.png  used on input line 796.
 (pdftex.def)             Requested size: 153.64493pt x 153.64627pt.
  [39
 
@@ -1250,17 +1250,17 @@ Package pdftex.def Info: Images/original_l21.png  used on input line 746.
 <Images/l21R_5.468.png, id=1319, 290.08376pt x 290.08376pt>
 File: Images/l21R_5.468.png Graphic file (type png)
 <use Images/l21R_5.468.png>
-Package pdftex.def Info: Images/l21R_5.468.png  used on input line 772.
+Package pdftex.def Info: Images/l21R_5.468.png  used on input line 822.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
 <Images/l21L_5.468.png, id=1320, 290.08376pt x 290.08376pt>
 File: Images/l21L_5.468.png Graphic file (type png)
 <use Images/l21L_5.468.png>
-Package pdftex.def Info: Images/l21L_5.468.png  used on input line 772.
+Package pdftex.def Info: Images/l21L_5.468.png  used on input line 822.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
 <Images/l21S_5.468.png, id=1321, 290.08376pt x 290.08376pt>
 File: Images/l21S_5.468.png Graphic file (type png)
 <use Images/l21S_5.468.png>
-Package pdftex.def Info: Images/l21S_5.468.png  used on input line 772.
+Package pdftex.def Info: Images/l21S_5.468.png  used on input line 822.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
  [40
 
@@ -1268,17 +1268,17 @@ Package pdftex.def Info: Images/l21S_5.468.png  used on input line 772.
 <Images/l21R_8.png, id=1355, 290.08376pt x 290.08376pt>
 File: Images/l21R_8.png Graphic file (type png)
 <use Images/l21R_8.png>
-Package pdftex.def Info: Images/l21R_8.png  used on input line 797.
+Package pdftex.def Info: Images/l21R_8.png  used on input line 847.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
 <Images/l21L_8.png, id=1356, 290.08376pt x 290.08376pt>
 File: Images/l21L_8.png Graphic file (type png)
 <use Images/l21L_8.png>
-Package pdftex.def Info: Images/l21L_8.png  used on input line 797.
+Package pdftex.def Info: Images/l21L_8.png  used on input line 847.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
 <Images/l21S_8.png, id=1357, 290.08376pt x 290.08376pt>
 File: Images/l21S_8.png Graphic file (type png)
 <use Images/l21S_8.png>
-Package pdftex.def Info: Images/l21S_8.png  used on input line 797.
+Package pdftex.def Info: Images/l21S_8.png  used on input line 847.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
  [41
 
@@ -1286,17 +1286,17 @@ Package pdftex.def Info: Images/l21S_8.png  used on input line 797.
 <Images/l21R_4.png, id=1389, 290.08376pt x 290.08376pt>
 File: Images/l21R_4.png Graphic file (type png)
 <use Images/l21R_4.png>
-Package pdftex.def Info: Images/l21R_4.png  used on input line 822.
+Package pdftex.def Info: Images/l21R_4.png  used on input line 872.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
 <Images/l21L_4.png, id=1390, 290.08376pt x 290.08376pt>
 File: Images/l21L_4.png Graphic file (type png)
 <use Images/l21L_4.png>
-Package pdftex.def Info: Images/l21L_4.png  used on input line 822.
+Package pdftex.def Info: Images/l21L_4.png  used on input line 872.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
 <Images/l21S_4.png, id=1391, 290.08376pt x 290.08376pt>
 File: Images/l21S_4.png Graphic file (type png)
 <use Images/l21S_4.png>
-Package pdftex.def Info: Images/l21S_4.png  used on input line 822.
+Package pdftex.def Info: Images/l21S_4.png  used on input line 872.
 (pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
  [42
 
@@ -1306,7 +1306,7 @@ Package pdftex.def Info: Images/l21S_4.png  used on input line 822.
 <Images/isolation_forest.jpg, id=1455, 433.62pt x 289.08pt>
 File: Images/isolation_forest.jpg Graphic file (type jpg)
 <use Images/isolation_forest.jpg>
-Package pdftex.def Info: Images/isolation_forest.jpg  used on input line 840.
+Package pdftex.def Info: Images/isolation_forest.jpg  used on input line 890.
 (pdftex.def)             Requested size: 245.83282pt x 163.89069pt.
  [44
 
@@ -1324,7 +1324,7 @@ Package pdftex.def Info: Images/isolation_forest.jpg  used on input line 840.
 <Images/lam1.0ts_non_anomaly3907.jpg, id=1645, 387.4475pt x 279.0425pt>
 File: Images/lam1.0ts_non_anomaly3907.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_non_anomaly3907.jpg>
-Package pdftex.def Info: Images/lam1.0ts_non_anomaly3907.jpg  used on input line 901.
+Package pdftex.def Info: Images/lam1.0ts_non_anomaly3907.jpg  used on input line 951.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [50
 
@@ -1332,7 +1332,7 @@ Package pdftex.def Info: Images/lam1.0ts_non_anomaly3907.jpg  used on input line
 <Images/lam1.0ts_non_anomaly5199.jpg, id=1677, 387.4475pt x 279.0425pt>
 File: Images/lam1.0ts_non_anomaly5199.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_non_anomaly5199.jpg>
-Package pdftex.def Info: Images/lam1.0ts_non_anomaly5199.jpg  used on input line 910.
+Package pdftex.def Info: Images/lam1.0ts_non_anomaly5199.jpg  used on input line 960.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [51
 
@@ -1340,7 +1340,7 @@ Package pdftex.def Info: Images/lam1.0ts_non_anomaly5199.jpg  used on input line
 <Images/lam1.0ts_non_anomaly12235.jpg, id=1709, 391.4625pt x 279.0425pt>
 File: Images/lam1.0ts_non_anomaly12235.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_non_anomaly12235.jpg>
-Package pdftex.def Info: Images/lam1.0ts_non_anomaly12235.jpg  used on input line 919.
+Package pdftex.def Info: Images/lam1.0ts_non_anomaly12235.jpg  used on input line 969.
 (pdftex.def)             Requested size: 215.10196pt x 153.32907pt.
  [52
 
@@ -1348,7 +1348,7 @@ Package pdftex.def Info: Images/lam1.0ts_non_anomaly12235.jpg  used on input lin
 <Images/lam1.0ts_anomaly9830.jpg, id=1741, 398.48875pt x 279.0425pt>
 File: Images/lam1.0ts_anomaly9830.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_anomaly9830.jpg>
-Package pdftex.def Info: Images/lam1.0ts_anomaly9830.jpg  used on input line 928.
+Package pdftex.def Info: Images/lam1.0ts_anomaly9830.jpg  used on input line 978.
 (pdftex.def)             Requested size: 215.10196pt x 150.62535pt.
  [53
 
@@ -1356,7 +1356,7 @@ Package pdftex.def Info: Images/lam1.0ts_anomaly9830.jpg  used on input line 928
 <Images/lam1.0ts_anomalyzoom9830.jpg, id=1773, 399.4925pt x 279.0425pt>
 File: Images/lam1.0ts_anomalyzoom9830.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_anomalyzoom9830.jpg>
-Package pdftex.def Info: Images/lam1.0ts_anomalyzoom9830.jpg  used on input line 937.
+Package pdftex.def Info: Images/lam1.0ts_anomalyzoom9830.jpg  used on input line 987.
 (pdftex.def)             Requested size: 215.10196pt x 150.2464pt.
  [54
 
@@ -1364,7 +1364,7 @@ Package pdftex.def Info: Images/lam1.0ts_anomalyzoom9830.jpg  used on input line
 <Images/lam1.0ts_anomaly16519.jpg, id=1805, 385.44pt x 279.0425pt>
 File: Images/lam1.0ts_anomaly16519.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_anomaly16519.jpg>
-Package pdftex.def Info: Images/lam1.0ts_anomaly16519.jpg  used on input line 946.
+Package pdftex.def Info: Images/lam1.0ts_anomaly16519.jpg  used on input line 996.
 (pdftex.def)             Requested size: 215.10196pt x 155.72198pt.
  [55
 
@@ -1372,7 +1372,7 @@ Package pdftex.def Info: Images/lam1.0ts_anomaly16519.jpg  used on input line 94
 <Images/lam1.0ts_anomalyzoom16519.jpg, id=1838, 387.4475pt x 279.0425pt>
 File: Images/lam1.0ts_anomalyzoom16519.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_anomalyzoom16519.jpg>
-Package pdftex.def Info: Images/lam1.0ts_anomalyzoom16519.jpg  used on input line 955.
+Package pdftex.def Info: Images/lam1.0ts_anomalyzoom16519.jpg  used on input line 1005.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [56
 
@@ -1380,7 +1380,7 @@ Package pdftex.def Info: Images/lam1.0ts_anomalyzoom16519.jpg  used on input lin
 <Images/lam1.0ts_anomaly18313.jpg, id=1870, 394.47375pt x 279.0425pt>
 File: Images/lam1.0ts_anomaly18313.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_anomaly18313.jpg>
-Package pdftex.def Info: Images/lam1.0ts_anomaly18313.jpg  used on input line 964.
+Package pdftex.def Info: Images/lam1.0ts_anomaly18313.jpg  used on input line 1014.
 (pdftex.def)             Requested size: 215.10196pt x 152.15817pt.
  [57
 
@@ -1388,7 +1388,7 @@ Package pdftex.def Info: Images/lam1.0ts_anomaly18313.jpg  used on input line 96
 <Images/lam1.0ts_anomalyzoom18313.jpg, id=1902, 396.48125pt x 279.0425pt>
 File: Images/lam1.0ts_anomalyzoom18313.jpg Graphic file (type jpg)
 <use Images/lam1.0ts_anomalyzoom18313.jpg>
-Package pdftex.def Info: Images/lam1.0ts_anomalyzoom18313.jpg  used on input line 973.
+Package pdftex.def Info: Images/lam1.0ts_anomalyzoom18313.jpg  used on input line 1023.
 (pdftex.def)             Requested size: 215.10196pt x 151.39175pt.
  [58
 
@@ -1398,7 +1398,7 @@ Package pdftex.def Info: Images/lam1.0ts_anomalyzoom18313.jpg  used on input lin
 <Images/LSTMlam3.3ts_non_anomaly4988.jpg, id=1965, 387.4475pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_non_anomaly4988.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_non_anomaly4988.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly4988.jpg  used on input line 992.
+Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly4988.jpg  used on input line 1042.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [60
 
@@ -1406,7 +1406,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly4988.jpg  used on input 
 <Images/LSTMlam3.3ts_non_anomaly5460.jpg, id=1997, 387.4475pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_non_anomaly5460.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_non_anomaly5460.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly5460.jpg  used on input line 1001.
+Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly5460.jpg  used on input line 1051.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [61
 
@@ -1414,7 +1414,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly5460.jpg  used on input 
 <Images/LSTMlam3.3ts_non_anomaly13390.jpg, id=2030, 402.50375pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_non_anomaly13390.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_non_anomaly13390.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly13390.jpg  used on input line 1010.
+Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly13390.jpg  used on input line 1060.
 (pdftex.def)             Requested size: 215.10196pt x 149.12233pt.
  [62
 
@@ -1422,7 +1422,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly13390.jpg  used on input
 <Images/LSTMlam3.3ts_anomaly5105.jpg, id=2062, 401.5pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_anomaly5105.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_anomaly5105.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5105.jpg  used on input line 1019.
+Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5105.jpg  used on input line 1069.
 (pdftex.def)             Requested size: 215.10196pt x 149.50128pt.
  [63
 
@@ -1430,7 +1430,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5105.jpg  used on input line
 <Images/LSTMlam3.3ts_anomalyzoom5105.jpg, id=2094, 387.4475pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_anomalyzoom5105.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_anomalyzoom5105.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5105.jpg  used on input line 1028.
+Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5105.jpg  used on input line 1078.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [64
 
@@ -1438,7 +1438,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5105.jpg  used on input 
 <Images/LSTMlam3.3ts_anomaly5223.jpg, id=2126, 392.46625pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_anomaly5223.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_anomaly5223.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5223.jpg  used on input line 1037.
+Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5223.jpg  used on input line 1087.
 (pdftex.def)             Requested size: 215.10196pt x 152.9416pt.
  [65
 
@@ -1446,7 +1446,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5223.jpg  used on input line
 <Images/LSTMlam3.3ts_anomalyzoom5223.jpg, id=2158, 387.4475pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_anomalyzoom5223.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_anomalyzoom5223.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5223.jpg  used on input line 1046.
+Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5223.jpg  used on input line 1096.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [66
 
@@ -1454,7 +1454,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5223.jpg  used on input 
 <Images/LSTMlam3.3ts_anomaly5436.jpg, id=2190, 392.46625pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_anomaly5436.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_anomaly5436.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5436.jpg  used on input line 1055.
+Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5436.jpg  used on input line 1105.
 (pdftex.def)             Requested size: 215.10196pt x 152.9416pt.
  [67
 
@@ -1462,7 +1462,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_anomaly5436.jpg  used on input line
 <Images/LSTMlam3.3ts_anomalyzoom5436.jpg, id=2223, 387.4475pt x 279.0425pt>
 File: Images/LSTMlam3.3ts_anomalyzoom5436.jpg Graphic file (type jpg)
 <use Images/LSTMlam3.3ts_anomalyzoom5436.jpg>
-Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5436.jpg  used on input line 1064.
+Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5436.jpg  used on input line 1114.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [68
 
@@ -1472,7 +1472,7 @@ Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5436.jpg  used on input 
 <Images/GRUlam3.3ts_non_anomalyzoom14177.jpg, id=2286, 387.4475pt x 279.0425pt>
 File: Images/GRUlam3.3ts_non_anomalyzoom14177.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_non_anomalyzoom14177.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom14177.jpg  used on input line 1083.
+Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom14177.jpg  used on input line 1133.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [70
 
@@ -1480,7 +1480,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom14177.jpg  used on in
 <Images/GRUlam3.3ts_non_anomalyzoom15044.jpg, id=2318, 387.4475pt x 279.0425pt>
 File: Images/GRUlam3.3ts_non_anomalyzoom15044.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_non_anomalyzoom15044.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom15044.jpg  used on input line 1092.
+Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom15044.jpg  used on input line 1142.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [71
 
@@ -1488,7 +1488,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom15044.jpg  used on in
 <Images/GRUlam3.3ts_non_anomalyzoom15532.jpg, id=2350, 398.48875pt x 279.0425pt>
 File: Images/GRUlam3.3ts_non_anomalyzoom15532.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_non_anomalyzoom15532.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom15532.jpg  used on input line 1101.
+Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom15532.jpg  used on input line 1151.
 (pdftex.def)             Requested size: 215.10196pt x 150.62535pt.
  [72
 
@@ -1496,7 +1496,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_non_anomalyzoom15532.jpg  used on in
 <Images/GRUlam3.3ts_anomaly9700.jpg, id=2382, 401.5pt x 279.0425pt>
 File: Images/GRUlam3.3ts_anomaly9700.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_anomaly9700.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_anomaly9700.jpg  used on input line 1110.
+Package pdftex.def Info: Images/GRUlam3.3ts_anomaly9700.jpg  used on input line 1160.
 (pdftex.def)             Requested size: 215.10196pt x 149.50128pt.
  [73
 
@@ -1504,7 +1504,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_anomaly9700.jpg  used on input line 
 <Images/GRUlam3.3ts_anomalyzoom9700.jpg, id=2415, 387.4475pt x 279.0425pt>
 File: Images/GRUlam3.3ts_anomalyzoom9700.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_anomalyzoom9700.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom9700.jpg  used on input line 1119.
+Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom9700.jpg  used on input line 1169.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [74
 
@@ -1512,7 +1512,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom9700.jpg  used on input l
 <Images/GRUlam3.3ts_anomaly10295.jpg, id=2447, 406.51875pt x 279.0425pt>
 File: Images/GRUlam3.3ts_anomaly10295.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_anomaly10295.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_anomaly10295.jpg  used on input line 1128.
+Package pdftex.def Info: Images/GRUlam3.3ts_anomaly10295.jpg  used on input line 1178.
 (pdftex.def)             Requested size: 215.10196pt x 147.64911pt.
  [75
 
@@ -1520,7 +1520,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_anomaly10295.jpg  used on input line
 <Images/GRUlam3.3ts_anomalyzoom10295.jpg, id=2479, 391.4625pt x 279.0425pt>
 File: Images/GRUlam3.3ts_anomalyzoom10295.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_anomalyzoom10295.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom10295.jpg  used on input line 1137.
+Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom10295.jpg  used on input line 1187.
 (pdftex.def)             Requested size: 215.10196pt x 153.32907pt.
  [76
 
@@ -1528,7 +1528,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom10295.jpg  used on input 
 <Images/GRUlam3.3ts_anomaly10305.jpg, id=2511, 401.5pt x 279.0425pt>
 File: Images/GRUlam3.3ts_anomaly10305.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_anomaly10305.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_anomaly10305.jpg  used on input line 1146.
+Package pdftex.def Info: Images/GRUlam3.3ts_anomaly10305.jpg  used on input line 1196.
 (pdftex.def)             Requested size: 215.10196pt x 149.50128pt.
  [77
 
@@ -1536,7 +1536,7 @@ Package pdftex.def Info: Images/GRUlam3.3ts_anomaly10305.jpg  used on input line
 <Images/GRUlam3.3ts_anomalyzoom10305.jpg, id=2543, 387.4475pt x 279.0425pt>
 File: Images/GRUlam3.3ts_anomalyzoom10305.jpg Graphic file (type jpg)
 <use Images/GRUlam3.3ts_anomalyzoom10305.jpg>
-Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom10305.jpg  used on input line 1155.
+Package pdftex.def Info: Images/GRUlam3.3ts_anomalyzoom10305.jpg  used on input line 1205.
 (pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
  [78
 
