@@ -1,0 +1,3 @@
+RAE accuracy: 0.9144
+DAE accuracy: 0.94525
+RAE performance improvement: -0.03263686855329283

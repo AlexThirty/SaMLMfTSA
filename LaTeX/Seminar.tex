@@ -79,7 +79,7 @@
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
-\usepackage{etex}
+%\usepackage{etex}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -322,7 +322,7 @@
 	\begin{itemize}
 		\item A Deep Autoencoder (DAE) is constituted by two main components: an encoder $E$ and a Decoder $D$.
 		\item The main objective of a DAE is to learn the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$.
-		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coded space. Usually they are Deep Neural Networks e.g. FCNN complex models such as Long Short Term Memory (LSTM) or Gated Recurrent Units (GRU).
+		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coded space. Usually they are Deep Neural Networks e.g. FCNN complex models such as LSTM or GRU.
 		\item The objective is usually to find the minimum reconstruction error w.r.t. some parametrized encoding and decoding functions and a distance (in this case the $L_2$ norm)
 			\begin{equation}
 				\min_{\theta, \phi}{\norm{X-D_{\theta}(E_{\phi}(X))}_{2}}
@@ -586,7 +586,7 @@
 		\item This let us see how well the model is able to extract the important features of the images in a meaningful way.
 		\item In this case the RDAE and DAE need to denoise the images and recognize which charactheristics are improtant.
 		\item Both architectures are simple FCNN with layers of size $784$ (input), $200$ and $10$ (the bottleneck and hidden feature layer).
-		\item The RDAE was trained for $10$ outer iterations with $50$ inner iterations each, while the DAE was trained for $100$ epochs. The batch size is $256$.
+		\item The RDAE was trained for $10$ outer iterations with $100$ inner iterations each, while the DAE was trained for $100$ epochs. The batch size is $256$.
 	\end{itemize}
 \end{frame}
 
@@ -614,7 +614,7 @@
 	\frametitle{Deep Autoencoder RF performance}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.7\linewidth]{Images/DAE_acc.png}
+		\includegraphics[width=0.65\linewidth]{Images/DAE_acc.png}
 		\caption[]{Performance of the Random forest on the hidden layer of base Deep Autoencoder on different $\lambda$, corruption}
 	\end{figure}
 \end{frame}
@@ -623,7 +623,7 @@
 	\frametitle{$l_1$ RDAE RF performance}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.7\linewidth]{Images/RAE_acc.png}
+		\includegraphics[width=0.65\linewidth]{Images/RAE_acc.png}
 		\caption[]{Performance of the Random forest on the hidden layer of base $l_1$ RDAE on different $\lambda$, corruption}
 	\end{figure}
 \end{frame}
@@ -646,56 +646,104 @@
 	\end{itemize}
 \end{frame}
 
-\begin{comment}
 \begin{frame}
+	\frametitle{Reconstruction of noisy images}
+	\begin{itemize}
+		\item We will now see some results on the denoising capability of the $l_1$ RDAE compared to the basic DAE.
+		\item I selected to choose $\lambda=20.0$ as it is the value for which latent representation of data gave approximately the best results for every percentage of corruption.
+		\item We will see $10$ images per parameters and architecture, for a corruption percentage of $10\%, 20\%, 30\%, 40\%, 50\%$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
-		\includegraphics[]{}
-		\caption[]{}
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.1/DAE_recon.png}
+		\caption[]{DAE cleaned data, corruption $10\%$}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
-		\includegraphics[]{}
-		\caption[]{}
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.1/RAE_recon.png}
+		\caption[]{RAE cleaned data, corruption $10\%$}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
-		\includegraphics[]{}
-		\caption[]{}
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.2/DAE_recon.png}
+		\caption[]{DAE cleaned data, corruption $20\%$}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
-		\includegraphics[]{}
-		\caption[]{}
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.2/RAE_recon.png}
+		\caption[]{RAE cleaned data, corruption $20\%$}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
-		\includegraphics[]{}
-		\caption[]{}
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.3/DAE_recon.png}
+		\caption[]{DAE cleaned data, corruption $30\%$}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
-		\includegraphics[]{}
-		\caption[]{}
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.3/RAE_recon.png}
+		\caption[]{RAE cleaned data, corruption $30\%$}
 	\end{figure}
 \end{frame}
-\end{comment}
 
+\begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.4/DAE_recon.png}
+		\caption[]{DAE cleaned data, corruption $40\%$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.4/RAE_recon.png}
+		\caption[]{RAE cleaned data, corruption $40\%$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.5/DAE_recon.png}
+		\caption[]{DAE cleaned data, corruption $50\%$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Image denoising analysis, $\lambda=20.0$}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.5/RAE_recon.png}
+		\caption[]{RAE cleaned data, corruption $50\%$}
+	\end{figure}
+\end{frame}
 
 \begin{frame}
 	\frametitle{$l_{2,1}$ Robust Deep Autoencoder}
