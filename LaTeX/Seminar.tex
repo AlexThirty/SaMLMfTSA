@@ -320,10 +320,10 @@
 \begin{frame}
 	\frametitle{Deep Autoencoders}
 	\begin{itemize}
-		\item A Deep Autoencoder (DAE) is constituted by two main components: an encoder $E$ and a Decoder $D$.
-		\item The main objective of a DAE is to learn the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$.
-		\item The encoder and decoder functions $E, D$ can be any kind of mapping between the data space and the coded space. Usually they are Deep Neural Networks e.g. FCNN complex models such as LSTM or GRU.
-		\item The objective is usually to find the minimum reconstruction error w.r.t. some parametrized encoding and decoding functions and a distance (in this case the $L_2$ norm)
+		\item A Deep Autoencoder (DAE) is constituted by two main components: an encoder $E$ and a Decoder $D$. It produces a low dimensional representation of data $Z=E(X)$.
+		\item The DAE learns the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$.
+		\item $E, D$ can be any mapping between the data space and the coded space. Usually we use FCNN or more complex models (LSTM or GRU).
+		\item The loss function: it is the minimum reconstruction error w.r.t. some parametrized encoding and decoding functions and a distance (in this case the $L_2$ norm)
 			\begin{equation}
 				\min_{\theta, \phi}{\norm{X-D_{\theta}(E_{\phi}(X))}_{2}}
 			\end{equation}
@@ -333,11 +333,10 @@
 \begin{frame}
 	\frametitle{Principal Component Analysis}
 	\begin{itemize}
-		\item Assume to have a set of $N$ samples of $n$ dimensional data, so that $X\in \R^{N\times n}$ s.t. each column has $0$ mean (we can just shift the data to fulfill this request).
-		\item Principal Component Analysis (PCA) is defined as an orthogonal linear transformation such that the new coordinate system of $\R^{n}$ satisfies: 
-			the $i$-th component of the coordinate system has the $i$-th greatest data variance if we project all samples on that component.
-		\item Ideally we are trying to fit a $n$-ellipsoid into the data. The length of an axis of the ellipsoid represents the variance of data along that axis.
-		\item PCA is often used for dimensionality reduction or encoding: we can project the data on the first $k<n$ principal components.
+		\item Assume following data shape: $N$ samples of $d$ dimensional data $X\in \R^{N\times d}$ and assume each feature has $0$ mean.
+		\item Principal Component Analysis (PCA) is an orthogonal linear transformation $U$ s.t. in the new coordinate system the $i$-th component has the $i$-th greatest data variance.
+		\item Ideally we want to fit a $n$-ellipsoid into the data. The length of an axis of the ellipsoid represents the variance of data along that axis.
+		\item PCA is often used for dimensionality reduction or encoding: we can project the data on the first $k<d$ principal components.
 	\end{itemize}
 \end{frame}
 
@@ -361,9 +360,8 @@
 	\frametitle{Robust Principal Component Analysis}
 	\begin{itemize}
 		\item Robust Principal Component Analysis (RPCA) is a generalization of PCA that aims to reduce the sensitivity of PCA to outliers.
-		\item The idea is to find a low-dimensional representation of data cleaned from the sparse outliers that can disturb the PCA process.
-		\item We therefore assume that data $X$ can be represented as $X = L + S$: $L$ has low rank and is the low-dimensional representation of $X$ while $S$ is a sparse matrix 
-			consisting of the outlier elements that cannot be captured by the representation.
+		\item The idea is to find a low-dimensional representation of data cleaned from the sparse outliers.
+		\item Assume that data $X$ can be represented as $X = L + S$: $L$ has low rank and is the low-dimensional representation of $X$ while $S$ is a sparse matrix containing outliers and anomalous data.
 	\end{itemize}
 \end{frame}
 
@@ -377,7 +375,7 @@
 			\end{align}
 			where $\rho(\cdot)$ is the rank of a matrix and we used the zero norm.
 		\item This optimization problem is NP-hard and tractable only for small metrices.
-		\item Usually it is substituted by the following problem, which is convex and tractable also for large matrices:
+		\item The used objective is instead:
 			\begin{align}
 				\min_{L,S}{\norm{L}_{*}+\lambda \norm{S}_{1}}\\
 				\text{s. t. }\norm{X - L - S}_F^2=0
@@ -391,9 +389,9 @@
 \begin{frame}
 	\frametitle{Robust Deep Autoencoders}
 	\begin{itemize}
-		\item The main idea behind Robust Deep Autoencoders (RDAE) is to combine the representation learning of DAEs and the anomaly detection capability of RPCA.
+		\item Robust Deep Autoencoders (RDAE) combine the representation learning of DAEs and the anomaly detection capability of RPCA.
 		\item Noise and outliers are incompressible in the lower dimensional space we want to represent our data in.
-		\item The objective is to learn a good low dimensional representation except for few exceptions.
+		\item We want to exclude anomalies and learn a low dimensional representation of data.
 		\item We will see two RDAE typed, one for $l_1$ regularization and one for $l_{2,1}$.
 	\end{itemize}
 \end{frame}
@@ -401,25 +399,25 @@
 \begin{frame}
 	\frametitle{RDAE with $l_1$ regularization}
 	\begin{itemize}
-		\item The RDAE objective is to decompose data $X=L_D+S$ just as in RPCA.
+		\item We try to decompose data as $X=L_D+S$ as in RPCA.
 		\item By removing the noise $S$ the autoencoder can better reconstruct $L_D$.
-		\item As before, the best choice to obtain a sparse $S$ would be to use a loss of the type $\norm{S}_0$ which counts the non-zero entries, solving the problem
+		\item We then combine the two losses in the following minimization problem
 			\begin{align}
 				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S}_0}\\
 				\text{s.t. }X-L_D-S=0  
 			\end{align}
-		\item The parameter $\lambda$ controls the sparsity of $S$ and plays an essential role.
+		\item The parameter $\lambda$ controls the sparsity of $S$.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{The role of $\lambda$}
 	\begin{itemize}
-		\item As we said, the role of $\lambda$ is very important.
-		\item A smaller $\lambda$ means that the norm of $S$ plays a less important role and much of the loss will come from the DAE.
-		\item The model will reconstruct better but recognize less outliers. This could be helpful if we want a more faithful representation e.g. for supervised tasks.
+		\item A smaller $\lambda$ means that the norm of $S$ is less important w.r.t. the DAE loss.
+		\item The model will reconstruct better but recognize less outliers. Helpful if we want a more faithful representation.
 		\item A larger $\lambda$, instead, gives more importance to the norm of $S$ as a loss.
 		\item This means that the model will recognize more (or even too much) outliers, sacrificing some reconstruction performance.
+		\item Finding the right value for $\lambda$ is the main challenge for this model.
 	\end{itemize}
 \end{frame}
 
@@ -427,22 +425,22 @@
 \begin{frame}
 	\frametitle{The true objective}
 	\begin{itemize}
-		\item As for the RPCA the previous loss is non tractable. We then instead focus on the following problem:
+		\item The previous loss is higly non tractable. We focus on the following problem:
 			\begin{align}
 				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S}_1}\\
 				\text{s.t. }X-L_D-S=0  
 			\end{align}
-			Notice two things:
-		\item The autoencoder is trained with $L_D$, the part of its decomposition assumed to be outliers and noise free.
-		\item There is no specific requirement about the DAE, in fact $D_{\theta}$ and $E_{\theta}$ are generic decoder, encoder functions.
+		\item The autoencoder is trained with $L_D$, the noise and outliers free part.
+		\item There is no specific requirement about the DAE mappings.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{RDAE with $l_{2,1}$ regularization}
+	\frametitle{Regularization}
 	\begin{itemize}
-		\item The RDAE with $l_1$ penalization assumes that outliers and noise are not structured. The $l_1$ penalty is indeed just a regularization to induce sparsity.
-		\item In general we can have multiple types of errors: an instrument that corrupts an input feature or outliers where the input data is in some way structurally different from normal data.
+		\item The RDAE with $l_1$ penalization assumes that outliers and noise are not structured. The $l_1$ penalty just induces sparsity. We could have different kind of anomalies:
+		\item Feature (column) wise: a feature is corrupted in many samples.
+		\item Data (row) wise: a particular sample is anomalous. 
 	\end{itemize}
 \end{frame}
 
@@ -454,11 +452,11 @@
 \begin{frame}
 	\frametitle{The $l_{2,1}$ norm}
 	\begin{itemize}
-		\item The $l_{2,1}$ norm is defined as ($X\in \R^{N\times n}$):
+		\item The $l_{2,1}$ norm is defined as ($X\in \R^{N\times d}$):
 			\begin{equation}
 				\norm{X}_{2,1} = \sum_{j=1}^{n}{\norm{X_j}_{2}} = \sum_{j=1}^{n}{\left(\sum_{i=1}^{N}|X_{ij}|^{2}\right)^{\frac{1}{2}}}
 			\end{equation}
-		\item The $l_{2,1}$ norm can be seen as introducting a $l_2$ norm regularization over each feature and then adding a $l_1$ regularization accross features.
+		\item The $l_{2,1}$ norm can be seen as introducting a $l_2$ norm regularization over data for each feature and then adding a $l_1$ regularization accross features.
 		\item We can also do the other way around: to recognize data anomalies (by row) just apply the $l_{2,1}$ norm to $X^T$.
 	\end{itemize}
 \end{frame}
@@ -484,15 +482,24 @@
 	\frametitle{The proximal operator}
 	\begin{itemize}
 		\item To see in detail the training procedure for the RDAE we first need to consider the proximal operator.
-		\item For general optimization problems of the form $\min f(x)+\lambda g(x)$ where $g$ is convex some of the most used methods require to find
+		\item General framework: find the solution to $\min f(x)+\lambda g(x)$ where $g$ is convex. Consider
 			\begin{equation}
 				\prox_{\lambda, g}(x) = \argmin_{y}{g(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}
 			\end{equation}
+		\item In the case of proximal gradient optimization the iterative step is defined as:
+			\begin{equation}
+				x^{k+1} = \prox_{\lambda, g}(x)(x^{k}-\alpha \nabla f(x^{k}))
+			\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
 		\item In this case we then want to obtain a solution of the problems
 			\begin{align}
 				\prox_{\lambda, l_1}(x) = \argmin_{y}{l_1(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}\\
 				\prox_{\lambda, l_{2,1}}(x) = \argmin_{y}{l_{2,1}(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}
-			\end{align}
+			\end{align} 
 	\end{itemize}
 \end{frame}
 
@@ -506,15 +513,15 @@
 					0, & x_i\in[-\lambda, \lambda]
 				\end{cases}
 			\end{equation}
-			which in the case of $S\in\R^{N\times n}$ gets applied element by element.
-		\item For the $l_{2,1}$ norm, we obtain (let $S_{\cdot j}$ be the column vector $S_{ij}, j=1, \ldots, N$)
+			for $S\in\R^{N\times d}$  it gets applied element by element.
+		\item $l_{2,1}$ norm: for feature anomalies we obtain (letting $S_{\cdot j}$ be the column vector $S_{ij}, j=1, \ldots, N$)
 			\begin{equation}
 				(\prox_{\lambda, l_{2,1}}(S))_{ij} = \begin{cases}
-					S_{ij}-S_{ij} - \lambda\frac{S_{ij}}{\norm{S_{\cdot j}}_{2}}, & \norm{S_{\cdot j}}_{2} > \lambda\\
+					S_{ij}- \lambda\frac{S_{ij}}{\norm{S_{\cdot j}}_{2}}, & \norm{S_{\cdot j}}_{2} > \lambda\\
 					0, & \norm{S_{\cdot j}}_{2} \leq \lambda
 				\end{cases}
 			\end{equation}
-			if we are considering feature wise anomalies, substitute $S$ with $S^T$ for data anomalies.
+		\item Substitute $S$ with $S^T$ for data anomalies.
 	\end{itemize}
 \end{frame}
 
@@ -522,13 +529,12 @@
 	\frametitle{The main algorithm}
 	\begin{itemize}
 		\item The method used to train the RDAE is the Alternating Direction Method of Multipliers (ADMM).
-		\item The main idea is to optimize the problem
+		\item It is a two-step iterative process to solve the problem
 			\begin{align}
 				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S^T}_{2,1}}\\
 				\text{s.t. }X-L_D-S=0  
 			\end{align}
-			by doing it in two steps at each iteration.
-		\item First, we fix $S$ and optimize the DAE loss $\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2$ with backpropagation as usual.
+		\item First, we fix $S$ and optimize the DAE loss $\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2$ with backpropagation.
 		\item Then, we fix $L_D$ and optimize the regularization term with the proximal method.
 	\end{itemize}
 \end{frame}
@@ -554,8 +560,7 @@
 	\frametitle{Results}
 	\begin{itemize}
 		\item I tried to reproduce some of the results by the original article.
-		\item For the main article results the database used was the MNIST digits database.
-		\item The train data contains $50000$ samples while the test set contins $10000$ images.
+		\item We will initially use the MNIST digit daraset, which consists of $50000$ train samples amd $10000$ test images.
 		\item Data was flattened from images of shape $(28,28,1)$ into vectors of length $784$. Train data is then a matrix in $\R^{50000\times 784}$.
 		\item Pixel walues are converted from integers between $0$ and $255$ to floats between $0$ and $1$.
 	\end{itemize}
@@ -576,15 +581,24 @@
 		\item To assess the performance of the $l_1$ RDAE the proposed procedure is the following:
 		\item The training images get corrupted with a percentage of pixel (from $5\%$ to $50\%$) changed to a random value between $0$ and $1$.
 		\item Both the RDAE with $l_1$ regularization and a standard DAE (with same architecture as the DAE from the RDAE) are trained on these corrupted images.
-		\item A random forest classifier is then trained on the feature extracted at the bottomneck layers of the two models.
+		\item From the RDAE obtain the two matrices $L_D$, the cleaned data, and $S$, the sparse and anomalous part.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$l_1$ Robust Deep Autoencoder}
+	\begin{itemize}
+		\item Given the trained models we obtain the two bottleneck layer encodings: $Z = E(X)$ for the DAE and $Z_R=E_R(L_D)$ for the RDAE.
+		\item These encodings are divided into a training test ($\frac{2}{3}$) and a test set ($\frac{1}{3}$).
+		\item Two random forest classifiers are then trained on the training encodings extracted.
 		\item We test how these RF classifiers perform on the test set.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\begin{itemize}
-		\item This let us see how well the model is able to extract the important features of the images in a meaningful way.
-		\item In this case the RDAE and DAE need to denoise the images and recognize which charactheristics are improtant.
+		\item This should show how well the model is able to extract the important features in the low dimensional representation.
+		\item In this case the RDAE and DAE need to denoise the images and summarize the features.
 		\item Both architectures are simple FCNN with layers of size $784$ (input), $200$ and $10$ (the bottleneck and hidden feature layer).
 		\item The RDAE was trained for $10$ outer iterations with $100$ inner iterations each, while the DAE was trained for $100$ epochs. The batch size is $256$.
 	\end{itemize}
@@ -593,12 +607,9 @@
 \begin{frame}
 	\frametitle{$L_1$ RDAE analysis}
 	\begin{itemize}
-		\item Unfortunately, I could not replicate the results by the article.
-		\item I tried with different values for the parameters and different setups.
-		\item In any case, the $L_1$ RDAE performance was really similar to the performance of a simple Deep Autoencoder, in some cases worse.
-		\item This is not to say that the RDAE has a poor performance, as we will see it can have some better reconstructions with corrupted data.
-		\item The simpler approach seems to work better for supervised task with the hidden layer.
-		\item The article was written when Tensorflow and other libraries were still in progress. It could also be that recent improvements benefit the DAE performance.
+		\item Unfortunately, I could not replicate the results by the article, even by changing parameters.
+		\item The authors showed a significant improvement in performance by the RDAE, which didn't happen in my experiments.
+		\item We see the results in function of $\lambda$ and the corruption percentage.
 	\end{itemize}
 \end{frame}
 
@@ -640,23 +651,24 @@
 \begin{frame}
 	\frametitle{Comments on performance}
 	\begin{itemize}
-		\item As we can see the RDAE performed worse in each case.
-		\item In general, the problem is not the RDAE which is not performing good enough.
-		\item It seems indeed that the basic DAE performs really good, even on highly corrupted data.
+		\item In almost each case the RDAE performed slightly worse than the DAE.
+		\item The RDAE performance is not bad, but the simpler DAE approach seems to work better at this task.
+		\item The $30\%$ improvement they showed is impossibile to get from this DAE performance. 
+		\item The best value for $\lambda$ is $20.0$, even though almost all values showed similar results.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Reconstruction of noisy images}
+	\frametitle{Reconstruction/cleaning of noisy images}
 	\begin{itemize}
-		\item We will now see some results on the denoising capability of the $l_1$ RDAE compared to the basic DAE.
-		\item I selected to choose $\lambda=20.0$ as it is the value for which latent representation of data gave approximately the best results for every percentage of corruption.
-		\item We will see $10$ images per parameters and architecture, for a corruption percentage of $10\%, 20\%, 30\%, 40\%, 50\%$.
+		\item It is really fascinating and interesting to see the denoising capabilities of the two models.
+		\item I selected $\lambda=20.0$ as it is the value for which latent representation of data gave approximately the best results for every percentage of corruption.
+		\item For the RDAE we consider the cleaned $L_D$ version obtaining from the training procedure.
+		\item For the DAE we consider the reconstruction $\bar{X}=D(E(X))$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.1/DAE_recon.png}
@@ -665,7 +677,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.1/RAE_recon.png}
@@ -674,7 +685,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.2/DAE_recon.png}
@@ -683,7 +693,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.2/RAE_recon.png}
@@ -692,7 +701,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.3/DAE_recon.png}
@@ -701,7 +709,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.3/RAE_recon.png}
@@ -710,7 +717,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.4/DAE_recon.png}
@@ -719,7 +725,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.4/RAE_recon.png}
@@ -728,7 +733,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.5/DAE_recon.png}
@@ -737,7 +741,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Image denoising analysis, $\lambda=20.0$}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.95\linewidth]{Images/lam20.0corr0.5/RAE_recon.png}
@@ -748,18 +751,17 @@
 \begin{frame}
 	\frametitle{$l_{2,1}$ Robust Deep Autoencoder}
 	\begin{itemize}
-		\item The anomaly detection experiment is based on the recognizing of a specific digit of the MNIST dataset.
-		\item First all the $4$ digit images in the training set are collected in our dataset.
-		\item Then, some images are chose at random from all the other digits until they are around $5\%$ of total images in the dataset.
-		\item This will be considered as the outliers of our data.
+		\item The data anomaly detection experiment aims to separeate a specific digit of the MNIST dataset from others.
+		\item All the $4$ digit images in the training set are collected in our dataset.
+		\item Then, some images are chosen at random from all the other digits until they reach $5\%$ of total images in the dataset.
+		\item These will be considered as the outliers of our data.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}
 	\begin{itemize}
-		\item The $l_{2,1}$ RDAE is trained on this dataset without any side information.
-		\item Without telling the model which images are $4$ digits and which are outliers the model itself must recognize the latters from original data on his own.
+		\item The $l_{2,1}$ RDAE is trained on this dataset without any side information. It has to recognize outliers completely on its own.
 		\item The model architecture is the same as for the $l_1$ RDAE experiment.
 		\item The only parameter that requires tuning is $\lambda$.
 	\end{itemize}
@@ -767,14 +769,13 @@
 
 \begin{frame}
 	\begin{itemize}
-		\item Model performance is assessed by seeing how it is able to recognize the correct "outliers".
+		\item Model performance is assessed by how well it recognizes the correct "outliers".
 		\item The metrics used are the accuracy, the precision score, the recall score and the F1 score defined down below.
 			\begin{align}
 				ACC = \frac{TP+TN}{P+N}\;\;\; P = \frac{TP}{TP+FP}\\
 				R = \frac{TP}{TP+FN} \;\;\; F1 = 2\frac{P\cdot R}{P+R}
 			\end{align}
 		\item The F1 score, which tries to average in some way precision and recall, is the metrics used to select the $\lambda$ parameter.
-		\item $\lambda$ is the only parameter that is fine tuned (in a semi-supervised way).
 	\end{itemize}
 \end{frame}
 
@@ -814,8 +815,6 @@
 	\end{figure}
 \end{frame}
 
-
-
 \begin{frame}
 	\begin{itemize}
 		\item The maximum performance is obtained with $\lambda=5.468$ with an $F_1$ score of $0.668$.
@@ -825,13 +824,14 @@
 	\end{itemize}
 \end{frame}
 
-
 \begin{frame}
+	For each value of $\lambda$ we analize $3$ images:
 	\begin{itemize}
-		\item We are now going to have a look at the final and reconstructed images obtained from the RDAE.
-		\item For each value of $\lambda$ we have $3$ main images to look at: the reconstructionof the original images from the DAE in the RDAE, the final $L_D$ image (the "clean" version, in this case it should only contain $4$s) and the $S$ image, which should be non empty only for outliers.
-		\item We look $3$ different values for $\lambda$: the best one identified above, $8.0$ which adds too much penalization with few outliers identified and $4.0$ which is a low value and a lot of $4$s are considered outliers.
+		\item The reconstruction of the original images from the DAE in the RDAE $\bar{X} = D(E(X))$.
+		\item The final $L_D$ image (the "clean" version, in this case it should only contain $4$s) 
+		\item $S$ image, which should be non empty only for outliers.
 	\end{itemize}
+	We look $3$ different values for $\lambda$: the best one identified above, $8.0$ which adds too much penalization with few outliers identified and $4.0$ which is a low value and a lot of $4$s are considered outliers.
 \end{frame}
 
 \begin{frame}
@@ -843,7 +843,6 @@
 	\end{figure}
 \end{frame}
 
-
 \begin{frame}
 	\frametitle{$\lambda=5.468$}
 	\begin{figure}
@@ -851,19 +850,19 @@
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21R_5.468.png}
-			\caption{Reconstruction}
+			\caption{$\bar{X}$, reconstruction}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21L_5.468.png}
-			\caption{Cleaned data}
+			\caption{$L_D$, cleaned data}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21S_5.468.png}
-			\caption{Outliers detection}
+			\caption{$S$, outliers}
 		\end{subfigure}
 		   \caption{Accuracy: $0.970$, precision: $0.722$, recall: $0.621$, F1 score: $0.668$}
    \end{figure}
@@ -876,19 +875,19 @@
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21R_8.png}
-			\caption{Reconstruction}
+			\caption{$\bar{X}$, reconstruction}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21L_8.png}
-			\caption{Cleaned data}
+			\caption{$L_D$, cleaned data}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21S_8.png}
-			\caption{Outliers detection}
+			\caption{$S$, outliers}
 		\end{subfigure}
 		   \caption{Accuracy: $0.953$, precision: $1.00$, recall: $0.0386$, F1 score: $0.0743$}
    \end{figure}
@@ -901,19 +900,19 @@
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21R_4.png}
-			\caption{Reconstruction}
+			\caption{$\bar{X}$, reconstruction}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21L_4.png}
-			\caption{Cleaned data}
+			\caption{$L_D$, cleaned data}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{Images/l21S_4.png}
-			\caption{Outliers detection}
+			\caption{$S$, outliers}
 		\end{subfigure}
 		   \caption{Accuracy: $0.788$, precision: $0.167$, recall: $0.839$, F1 score: $0.278$}
    \end{figure}
@@ -922,9 +921,9 @@
 \begin{frame}
 	\begin{itemize}
 		\item The performance of the RDAE as outlied detector is compared with the one obtained using the isolation forest method.
-		\item The isolation forest method was a SOTA method for outlied detection. It is based on the idea that outliers are few and different and are separated from the rest.
+		\item The isolation forest method was a SOTA method for outlier detection. It is based on the idea that outliers are few, different and separated from the rest.
 		\item These outliers gets recognized using isolation trees which try to separate points from others.
-		\item The only parameter which is peculiar to the method and which gets selected with the same metrics is the outlier fraction (from $0$ to $0.5$)
+		\item The only parameter to be optimized is the outlier fraction (from $0$ to $0.5$).
 	\end{itemize}
 \end{frame}
 
@@ -939,9 +938,9 @@
 
 \begin{frame}
 	\begin{itemize}
-		\item The best isolation forest performance is $0.41$ with the outlier fraction set to the value of $0.06$ (which is really close to the outlier true fraction of $5\%$).
+		\item The best results is $0.41$ with the outlier fraction set to the value of $0.06$ (which is really close to the outlier true fraction of $5\%$).
 		\item This result is really close to the original article. The authors obtained a best $F_1$ score of $0.37$ with $0.11$ outlier fraction.
-		\item The little difference is in my opinion related to the different datasets but they are comparable.
+		\item The little difference is in my opinion related to the different datasets.
 		\item In each case the performance by isolation forest is far worse than the RDAE.
 	\end{itemize}
 \end{frame}
@@ -949,7 +948,7 @@
 \begin{frame}
 	\frametitle{Time series experiment}
 	\begin{itemize}
-		\item I tried to apply this method to time series, on which we focused in this course.
+		\item I tried to apply this method to time series.
 		\item In this case we are going to use a dataset from the Numenta Anomaly Benchmark \hyperref{https://github.com/numenta/NAB/tree/master/data}{}{}{(NAB)}. The database is called machine temperature system failure.
 		\item It is the sensor data of an internal component of a large, industrial mahcine. It should have $3$ anomalies: the first anomaly is a planned shutdown of the machine. The second anomaly is difficult to detect and directly led to the third anomaly, a catastrophic failure of the machine.
 		\item Data has $22464$ timesteps in total. I chose to consider subsequences of length $144$. The final dataset has then $22321$ training time series.
@@ -959,10 +958,10 @@
 
 \begin{frame}
 	\frametitle{RDAE architectures}
-	I tried using two architectures for the autoencoder part in the RDAE.
+	I tried using $3$ architectures for the autoencoder part in the RDAE.
 	\begin{itemize}
-		\item The first one is a Dense Neural Network with hidden layers of $60$ and $20$. It is trained for $20$ outer iterations and $50$ inner iterations for the autoencoder, a batch size of $256$ , $\epsilon=10^{-8}$.
-		\item The second one is a LSTM with two layers of $32$ and $16$ units, $10$ outer iterations and $25$ inner iterations with same batch size as before. 
+		\item The first one is a Dense Neural Network with hidden layers of $60$ and $20$. It is trained for $20$ outer iterations and $50$ inner iterations for the autoencoder, batch size $256$ , $\epsilon=10^{-8}$.
+		\item The second and the third one are a LSTM and a GRU with two layers of $32$ and $16$ units, $10$ outer iterations and $25$ inner iterations with same batch size as before. 
 	\end{itemize}
 \end{frame}
 
@@ -970,7 +969,7 @@
 	\frametitle{Analysis}
 	\begin{itemize}
 		\item Since data is unlabeled we don't have a clear benchmark for finding the correct value for $\lambda$.
-		\item I tried different values for $\lambda$ until the number of anomalies detected is nor too high nor too low.
+		\item I tried different values for $\lambda$ to see how the number of outliers scales.
 		\item For each architecture I picked some random anomalies and non-anomalies, to show how the RDAE is acting on time series and to have a look at what kind of anomalies it detectes.
 	\end{itemize}
 \end{frame}
@@ -1038,25 +1037,7 @@
 	\frametitle{Dense RDAE}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomaly16519.jpg}
-		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Dense RDAE}
-	\begin{figure}
-		\centering
 		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomalyzoom16519.jpg}
-		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Dense RDAE}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomaly18313.jpg}
 		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
 	\end{figure}
 \end{frame}
@@ -1129,25 +1110,7 @@
 	\frametitle{LSTM RDAE}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomaly5223.jpg}
-		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{LSTM RDAE}
-	\begin{figure}
-		\centering
 		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomalyzoom5223.jpg}
-		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{LSTM RDAE}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{Images/LSTMlam3.3ts_anomaly5436.jpg}
 		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
 	\end{figure}
 \end{frame}
@@ -1220,25 +1183,7 @@
 	\frametitle{GRU RDAE}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomaly10295.jpg}
-		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{GRU RDAE}
-	\begin{figure}
-		\centering
 		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomalyzoom10295.jpg}
-		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{GRU RDAE}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{Images/GRUlam3.3ts_anomaly10305.jpg}
 		\caption[]{Example of a anomaly subsequence for $\lambda=3.3$}
 	\end{figure}
 \end{frame}
@@ -1259,6 +1204,24 @@
 		\item Also in this case different anomalies found DO NOT overlap. So each of the failures is only recognized once. With GRU this happens in different parts of the subsequence.
 		\item Also here the reconstruction is far worse than in the dense case.
 		\item Again we could increase parameters for better performance. Computation here required $\sim 12$ minutes with GPU.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Final comments}
+	\begin{itemize}
+		\item The RDAE is a powerful tool for denoising and anomaly detection.
+		\item Unfortunately the main quest is to find the correct $\lambda$ value. With unlabeled data this could be very difficult.
+		\item In that case, a possible way out is to know the approximate anomaly rate and to hope the anomalies found match the true ones.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item Note an important thing: after we train the model where is no way to find anomalies on new given data.
+		\item The $L_D$ and $S$ matrices are produced only in the training procedure.
+		\item We can still denoise images with the Autoencoder part.
+		\item It could be tried to add new data after some iteration, without re-initializing.
 	\end{itemize}
 \end{frame}
 
