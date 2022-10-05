@@ -335,7 +335,7 @@
 	\begin{itemize}
 		\item Assume following data shape: $N$ samples of $d$ dimensional data $X\in \R^{N\times d}$ and assume each feature has $0$ mean.
 		\item Principal Component Analysis (PCA) is an orthogonal linear transformation $U$ s.t. in the new coordinate system the $i$-th component has the $i$-th greatest data variance.
-		\item Ideally we want to fit a $n$-ellipsoid into the data. The length of an axis of the ellipsoid represents the variance of data along that axis.
+		\item Ideally we want to fit a $d$-ellipsoid into the data. The length of an axis of the ellipsoid represents the variance of data along that axis.
 		\item PCA is often used for dimensionality reduction or encoding: we can project the data on the first $k<d$ principal components.
 	\end{itemize}
 \end{frame}
@@ -392,7 +392,7 @@
 		\item Robust Deep Autoencoders (RDAE) combine the representation learning of DAEs and the anomaly detection capability of RPCA.
 		\item Noise and outliers are incompressible in the lower dimensional space we want to represent our data in.
 		\item We want to exclude anomalies and learn a low dimensional representation of data.
-		\item We will see two RDAE typed, one for $l_1$ regularization and one for $l_{2,1}$.
+		\item We will see two RDAE types, one for $l_1$ regularization and one for $l_{2,1}$.
 	\end{itemize}
 \end{frame}
 
@@ -430,7 +430,7 @@
 				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S}_1}\\
 				\text{s.t. }X-L_D-S=0  
 			\end{align}
-		\item The autoencoder is trained with $L_D$, the noise and outliers free part.
+		\item The autoencoder is trained with $L_D$, the supposedly cleaned part.
 		\item There is no specific requirement about the DAE mappings.
 	\end{itemize}
 \end{frame}
@@ -488,7 +488,7 @@
 			\end{equation}
 		\item In the case of proximal gradient optimization the iterative step is defined as:
 			\begin{equation}
-				x^{k+1} = \prox_{\lambda, g}(x)(x^{k}-\alpha \nabla f(x^{k}))
+				x^{k+1} = \prox_{\lambda, g}(x^{k}-\alpha \nabla f(x^{k}))
 			\end{equation}
 	\end{itemize}
 \end{frame}
@@ -548,7 +548,7 @@
 		\item Set $L_D = D(E(L_D))$ as the reconstruction.
 		\item Set $S = X - L_D$.
 		\item Optimize $S$ using a $\prox_{\lambda, l_{\cdot}}$ function of choice.
-		\item If $c_1 = \frac{\norm{X-L_D-S}_2}{\norm{X}_2} < \epsilon$ or $c_2 = \frac{\norm{LS-L_D-S}_2}{\norm{X}_2} < \epsilon$ we have early convergence.
+		\item If $c_1 = \frac{\norm{X-L_D-S}_2}{\norm{X}_2} < \epsilon$ or $c_2 = \frac{\norm{L_S-L_D-S}_2}{\norm{X}_2} < \epsilon$ we have early convergence.
 		\item Set $L_S = L_D + S$.
 	\end{itemize}
 	Return $L_D$ and $S$.
@@ -560,7 +560,7 @@
 	\frametitle{Results}
 	\begin{itemize}
 		\item I tried to reproduce some of the results by the original article.
-		\item We will initially use the MNIST digit daraset, which consists of $50000$ train samples amd $10000$ test images.
+		\item We will initially use the MNIST digit dataset, which consists of $50000$ train samples amd $10000$ test images.
 		\item Data was flattened from images of shape $(28,28,1)$ into vectors of length $784$. Train data is then a matrix in $\R^{50000\times 784}$.
 		\item Pixel walues are converted from integers between $0$ and $255$ to floats between $0$ and $1$.
 	\end{itemize}
@@ -590,7 +590,7 @@
 	\begin{itemize}
 		\item Given the trained models we obtain the two bottleneck layer encodings: $Z = E(X)$ for the DAE and $Z_R=E_R(L_D)$ for the RDAE.
 		\item These encodings are divided into a training test ($\frac{2}{3}$) and a test set ($\frac{1}{3}$).
-		\item Two random forest classifiers are then trained on the training encodings extracted.
+		\item Two random forest classifiers are then trained on the training encodings extracted to classify the digit.
 		\item We test how these RF classifiers perform on the test set.
 	\end{itemize}
 \end{frame}
@@ -605,7 +605,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{$L_1$ RDAE analysis}
+	\frametitle{$l_1$ RDAE analysis}
 	\begin{itemize}
 		\item Unfortunately, I could not replicate the results by the article, even by changing parameters.
 		\item The authors showed a significant improvement in performance by the RDAE, which didn't happen in my experiments.
@@ -764,6 +764,7 @@
 		\item The $l_{2,1}$ RDAE is trained on this dataset without any side information. It has to recognize outliers completely on its own.
 		\item The model architecture is the same as for the $l_1$ RDAE experiment.
 		\item The only parameter that requires tuning is $\lambda$.
+		\item We consider an instance anomalous whenever the $S$ matrix has non-zero entries on its row.
 	\end{itemize}
 \end{frame}
 
@@ -1208,6 +1209,24 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Isolation Forest}
+	\begin{itemize}
+		\item I tried to fit an isolation forest on the same data, to see if we get the same kind of outliers.
+		\item With all outlier fraction values tested ($0.0001, 0.0005, 0.001, 0.01$), non of them showed significant results.
+		\item On the contrary, almost all the anomalies detected I saw were normal time series, almost flat.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Isolation forest anomaly example}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/anom_if0.001pos132.jpg}
+		\caption[]{Example of an anomaly found by the isolation forest with outlier fraction of $0.001$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Final comments}
 	\begin{itemize}
 		\item The RDAE is a powerful tool for denoising and anomaly detection.
@@ -1221,7 +1240,7 @@
 		\item Note an important thing: after we train the model where is no way to find anomalies on new given data.
 		\item The $L_D$ and $S$ matrices are produced only in the training procedure.
 		\item We can still denoise images with the Autoencoder part.
-		\item It could be tried to add new data after some iteration, without re-initializing.
+		\item It could be tried to add new data after some iteration, without re-initializing. This requires training again the autoencoder, which is the high computational part.
 	\end{itemize}
 \end{frame}
 

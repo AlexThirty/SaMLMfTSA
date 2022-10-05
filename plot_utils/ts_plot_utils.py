@@ -51,3 +51,16 @@ def save_ts_recon(ts, ts_recon, ts_L, ts_S, startpoint, zoom, filename):
     plt.xlabel('Timestep')
     plt.savefig(filename, bbox_inches='tight')
     plt.close()
+    
+    
+def save_ts_recon_if(ts, startpoint, filename):
+    indeces = np.arange(len(ts))+startpoint
+    plt.grid()
+    plt.plot(indeces, ts, label='Original')
+    plt.title('Original data from '+str(startpoint)+' to '+str(startpoint+len(ts)))
+    plt.legend()
+    plt.ylim(-0.1, 1.1)
+    plt.ylabel('Normalized value')
+    plt.xlabel('Timestep')
+    plt.savefig(filename, bbox_inches='tight')
+    plt.close()
