@@ -1,0 +1,24 @@
+\begin{thebibliography}{CLMW09}
+
+\bibitem[ALPA17]{DATA}
+Subutai Ahmad, Alexander Lavin, Scott Purdy, and Zuha Agha.
+\newblock Unsupervised real-time anomaly detection for streaming data.
+\newblock {\em Neurocomputing}, 262:134--147, 2017.
+\newblock Online Real-Time Learning Strategies for Data Streams.
+
+\bibitem[CLMW09]{RPCA}
+Emmanuel~J. Candes, Xiaodong Li, Yi~Ma, and John Wright.
+\newblock Robust principal component analysis?, 2009.
+
+\bibitem[Par14]{PROX}
+Neal Parikh.
+\newblock Proximal algorithms.
+\newblock {\em Foundations and Trends in Optimization}, 1:127--239, 01 2014.
+
+\bibitem[ZP17]{RAE}
+Chong Zhou and Randy~C. Paffenroth.
+\newblock Anomaly detection with robust deep autoencoders.
+\newblock {\em Proceedings of the 23rd ACM SIGKDD International Conference on
+  Knowledge Discovery and Data Mining}, page 665–674, 2017.
+
+\end{thebibliography}
