@@ -295,7 +295,7 @@
 %----------------------------------------------------------------------------------------
 
 \title[Anomaly Detection with Robust Deep Autoencoders]{Anomaly Detection with Robust Deep Autoencoders} % The short title appears at the bottom of every slide, the full title is only on the title page
-\subtitle[]{original article by C. Zhou and R. C. Peffenroth}
+\subtitle[]{}
 \author[Alessandro Trenta]{\emph{Alessandro Trenta}} % Your name
 \institute[] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 { \\ % Your institution for the title page
@@ -315,7 +315,26 @@
 
 \nocite{RAE}
 
-\section{Background}
+\section{Introduction and Background}
+
+\begin{frame}
+    \frametitle{Introduction}
+    \begin{itemize}
+        \item Anomaly detection is a fundamental problem when dealing with large amounts of data.
+        \item A single outlier or anomaly in the pipeline of a product could lead to bad quality or even in security hazards.
+        \item e.g. we want to know if a battery is in good state and to predict whether there is a concrete risk of damage/explosion.
+        \item The main challenge is related to the fact that anomalies are sparse points hidden in a large amount of normal data.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Introduction}
+    \begin{itemize}
+        \item In this presentation we are going to have a look at the Robust Deep Autoencoder models \cite{RAE} and their applications.
+        \item These models could be used to remove noise from data and, most importantly, detect anomalies.
+        \item First, we are going to have a look at the main ideas and components of the model.
+    \end{itemize}
+\end{frame}
 
 \begin{frame}
 	\frametitle{Deep Autoencoders}
@@ -331,35 +350,35 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Principal Component Analysis}
+	\frametitle{Principal Component Analysis (PCA)}
 	\begin{itemize}
 		\item Assume following data shape: $N$ samples of $d$ dimensional data $X\in \R^{N\times d}$ and assume each feature has $0$ mean.
-		\item Principal Component Analysis (PCA) is an orthogonal linear transformation $U$ s.t. in the new coordinate system the $i$-th component has the $i$-th greatest data variance.
-		\item PCA is often used for dimensionality reduction or encoding: we can project the data on the first $k<d$ principal components.
+		\item Mathematically, PCA is an orthogonal linear transformation $U$ s.t. in the new coordinate system the $i$-th component has the $i$-th greatest data variance.
+		\item PCA is often used for dimensionality reduction or encoding: simply project the data on the first $k<d$ principal components and use them as new features.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Principal Component Analysis}
-	Mathematically we can define:
-		\begin{equation}
-			w_1 = \argmax_{\norm{w}_{2}=1}{\norm{Xw}_{2}^2} = \argmax_{w}{\frac{w^TX^TXw}{w^Tw}}
-		\end{equation}
-		for the first component. Then for the $k$-th component we first subtract the first $k-1$ principal component from $X$
-		\begin{equation}
-			\hat{X}_{k} = X - \sum_{i=1}^{k-1}{Xw_{i}w_{i}^T}
-		\end{equation}
-		and finally solving again the similar problem:
-		\begin{equation}
-			w_k = \argmax_{\norm{w}_{2}=1}{\norm{\hat{X}_{k}w}_{2}^2} = \argmax_{w}{\frac{w^T\hat{X}_{k}^T\hat{X}_{k}w}{w^Tw}}
-		\end{equation}
+	Define:
+	\begin{equation}
+	    w_1 = \argmax_{\norm{w}_{2}=1}{\norm{Xw}_{2}^2} = \argmax_{w}{\frac{w^TX^TXw}{w^Tw}}
+	\end{equation}
+	for the first component. Then for the $k$-th component we first subtract the first $k-1$ principal component from $X$
+	\begin{equation}
+		\hat{X}_{k} = X - \sum_{i=1}^{k-1}{Xw_{i}w_{i}^T}
+	\end{equation}
+	and finally solving again the similar problem:
+	\begin{equation}
+		w_k = \argmax_{\norm{w}_{2}=1}{\norm{\hat{X}_{k}w}_{2}^2} = \argmax_{w}{\frac{w^T\hat{X}_{k}^T\hat{X}_{k}w}{w^Tw}}
+	\end{equation}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Robust Principal Component Analysis}
 	\begin{itemize}
-		\item Robust Principal Component Analysis (RPCA) is a generalization of PCA that aims to reduce the sensitivity of PCA to outliers.
-		\item The idea is to find a low-dimensional representation of data cleaned from the sparse outliers.
+		\item Robust Principal Component Analysis (RPCA) is a generalization of PCA that aims to reduce the sensitivity of PCA to outliers and noise.
+		\item Idea: separate noise and outliers, then learn a low dimensional representation of cleaned data.
 		\item Assume that data $X$ can be represented as $X = L + S$: $L$ has low rank and is the low-dimensional representation of $X$ while $S$ is a sparse matrix containing outliers and anomalous data.
 	\end{itemize}
 \end{frame}
@@ -374,7 +393,7 @@
 			\end{align}
 			where $\rho(\cdot)$ is the rank of a matrix and we used the zero norm.
 		\item This optimization problem is NP-hard and tractable only for small metrices.
-		\item The used objective is instead:
+		\item We use this objective is instead:
 			\begin{align}
 				\min_{L,S}{\norm{L}_{*}+\lambda \norm{S}_{1}}\\
 				\text{s. t. }\norm{X - L - S}_F^2=0
@@ -399,27 +418,15 @@
 	\frametitle{RDAE with $l_1$ regularization}
 	\begin{itemize}
 		\item We try to decompose data as $X=L_D+S$ as in RPCA.
-		\item By removing the noise $S$ the autoencoder can better reconstruct $L_D$.
 		\item We then combine the two losses in the following minimization problem
 			\begin{align}
 				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S}_0}\\
 				\text{s.t. }X-L_D-S=0  
 			\end{align}
-		\item The parameter $\lambda$ controls the sparsity of $S$.
-	\end{itemize}
+		\item The parameter $\lambda$ controls the sparsity of $S$. A smaller $\lambda$ means that the norm of $S$ is less important w.r.t. DAE loss (better reconstruction, less outliers) and viceversa.
+        \item Finding the best value for $\lambda$ is the main challenge.
+    \end{itemize}
 \end{frame}
-
-\begin{frame}
-	\frametitle{The role of $\lambda$}
-	\begin{itemize}
-		\item A smaller $\lambda$ means that the norm of $S$ is less important w.r.t. the DAE loss.
-		\item The model will reconstruct better but recognize less outliers. Helpful if we want a more faithful representation.
-		\item A larger $\lambda$, instead, gives more importance to the norm of $S$ as a loss.
-		\item This means that the model will recognize more (or even too much) outliers, sacrificing some reconstruction performance.
-		\item Finding the right value for $\lambda$ is the main challenge for this model.
-	\end{itemize}
-\end{frame}
-
 	
 \begin{frame}
 	\frametitle{The true objective}
@@ -430,7 +437,6 @@
 				\text{s.t. }X-L_D-S=0  
 			\end{align}
 		\item The autoencoder is trained with $L_D$, the supposedly cleaned part.
-		\item There is no specific requirement about the DAE mappings.
 	\end{itemize}
 \end{frame}
 
@@ -441,11 +447,6 @@
 		\item Feature (column) wise: a feature is corrupted in many samples e.g. a broken pixel in a sensor.
 		\item Data (row) wise: a particular sample is anomalous. 
 	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\centering
-	\includegraphics[width=0.9\linewidth]{Images/diff_anomalies.png}
 \end{frame}
 
 \begin{frame}
@@ -499,6 +500,7 @@
 				\prox_{\lambda, l_1}(x) = \argmin_{y}{l_1(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}\\
 				\prox_{\lambda, l_{2,1}}(x) = \argmin_{y}{l_{2,1}(y)+\frac{1}{2\lambda}\norm{x-y}_{2}^{2}}
 			\end{align} 
+        \item As we will see shortly we have explicit formulas for this operators and they can get computed really fast.
 	\end{itemize}
 \end{frame}
 
@@ -527,7 +529,7 @@
 \begin{frame}
 	\frametitle{The main algorithm}
 	\begin{itemize}
-		\item The method used to train the RDAE is the Alternating Direction Method of Multipliers (ADMM).
+		\item The proposed method to train the RDAE is the Alternating Direction Method of Multipliers (ADMM).
 		\item It is a two-step iterative process to solve the problem
 			\begin{align}
 				\min_{\theta}{\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2 + \lambda\norm{S^T}_{2,1}}\\
@@ -590,7 +592,8 @@
 \begin{frame}
 	\frametitle{Results}
 	\begin{itemize}
-		\item We will initially use the MNIST digit dataset, which consists of $50000$ train samples amd $10000$ test images.
+        \item We now have a look at how the model performs on some tasks.
+		\item We will initially use the MNIST digit dataset, using the $50000$ train images available.
 		\item Data was flattened from images of shape $(28,28,1)$ into vectors of length $784$. Train data is then a matrix in $\R^{50000\times 784}$.
 		\item Pixel walues are converted from integers between $0$ and $255$ to floats between $0$ and $1$.
 	\end{itemize}
@@ -648,7 +651,7 @@
 \begin{frame}
 	\frametitle{$l_{2,1}$ Robust Deep Autoencoder}
 	\begin{itemize}
-		\item The data anomaly detection experiment aims to separeate a specific digit of the MNIST dataset from others.
+		\item To assess the performance of RDAE in anomaly detection we start by using a synthetic labeled dataset.
 		\item All the $4$ digit images in the training set are collected in our dataset.
 		\item Then, some images are chosen at random from all the other digits until they reach $5\%$ of total images in the dataset.
 		\item These will be considered as the outliers of our data.
@@ -814,21 +817,36 @@
 \begin{frame}
 	\begin{itemize}
 		\item The best results is $0.41$ with the outlier fraction set to the value of $0.06$ (which is really close to the outlier true fraction of $5\%$).
-		\item This result is really close to the original article. The authors obtained a best $F_1$ score of $0.37$ with $0.11$ outlier fraction.
-		\item The little difference is in my opinion related to the different datasets.
 		\item In each case the performance by isolation forest is far worse than the RDAE.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
+    \frametitle{Real World Experiment}
+    \begin{itemize}
+        \item Now we have assessed the performance on a synthetic dataset we want to see how to apply this model to real world challenges.
+        \item Data is in general UNLABELED. Specially with loads of data, we can't do hand labeling of anomalies.
+        \item We want to see if the model still works for time series.
+        \item This could have a true application in Electra Vehicles products: given historical battery data if we are able to detect anomalies we can better spot dangers and errors.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Time series experiment}
 	\begin{itemize}
-		\item I tried to apply this method to time series.
-		\item In this case we are going to use a dataset from the Numenta Anomaly Benchmark \hyperref{https://github.com/numenta/NAB/tree/master/data}{}{}{(NAB)}. The database is called machine temperature system failure.
-		\item It is the sensor data of an internal component of a large, industrial mahcine. It should have $3$ anomalies: the first anomaly is a planned shutdown of the machine. The second anomaly is difficult to detect and directly led to the third anomaly, a catastrophic failure of the machine.
-		\item Data has $22464$ timesteps in total. I chose to consider subsequences of length $144$. The final dataset has then $22321$ training time series.
-		\item Data is normalized all togheter to be in $(0,1)$.
+		\item In this case we are going to use a dataset similar to our interest
+        \item It is taken from the Numenta Anomaly Benchmark \hyperref{https://github.com/numenta/NAB/tree/master/data}{}{}{(NAB)}. The database is called machine temperature system failure.
+		\item It is the sensor data of an internal component of a large, industrial mahcine. It should have $3$ kinds of anomalies: the first anomaly is a planned shutdown of the machine. The second anomaly should be difficult to detect and directly led to the third anomaly, a catastrophic failure of the machine.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data processing pipeline}
+    \begin{itemize}
+        \item Data has $22464$ timesteps in total. Data signals are taken every $5$ minutes.
+        \item I chose to consider subsequences of length $144$: this corresponds of windows of $12$ hours. The final dataset has then $22321$ training time series.
+		\item Data is normalized all togheter to be in $(0,1)$.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
