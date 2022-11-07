@@ -755,4 +755,583 @@ Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
 ) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
 )) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
-Package: pgffor 2021/05/15 v3.1.9a (3.1.9a
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)
+\pgffor@iter=\dimen332
+\pgffor@skip=\dimen333
+\pgffor@stack=\toks51
+\pgffor@toks=\toks52
+)) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count357
+\pgfplotmarksize=\dimen334
+)
+\tikz@lastx=\dimen335
+\tikz@lasty=\dimen336
+\tikz@lastxsaved=\dimen337
+\tikz@lastysaved=\dimen338
+\tikz@lastmovetox=\dimen339
+\tikz@lastmovetoy=\dimen340
+\tikzleveldistance=\dimen341
+\tikzsiblingdistance=\dimen342
+\tikz@figbox=\box128
+\tikz@figbox@bg=\box129
+\tikz@tempbox=\box130
+\tikz@tempbox@bg=\box131
+\tikztreelevel=\count358
+\tikznumberofchildren=\count359
+\tikznumberofcurrentchild=\count360
+\tikz@fig@count=\count361
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count362
+\pgfmatrixcurrentcolumn=\count363
+\pgf@matrix@numberofcolumns=\count364
+)
+\tikz@expandcount=\count365
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
+Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks53
+\verbatim@line=\toks54
+\verbatim@in@stream=\read4
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/animate\animate.sty
+Package: animate 2022/08/04 PDF & SVG animations from files and inline graphics
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/oberdiek\ifdraft.sty
+Package: ifdraft 2016/05/16 v1.4 Detect class options draft and final (HO)
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/media9\pdfbase.sty
+Package: pdfbase 2022/08/04 v0.55 driver independent access to low-level PDF features
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-08-30 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count366
+\l__pdf_internal_box=\box132
+)
+\g_pbs_page_int=\count367
+\g_pbs_oc_int=\count368
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/zref\zref-abspage.sty
+Package: zref-abspage 2022-04-07 v2.34 Module abspage for zref (HO)
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/zref\zref-base.sty
+Package: zref-base 2022-04-07 v2.34 Module base for zref (HO)
+Package zref Info: New property list: main on input line 767.
+Package zref Info: New property: default on input line 768.
+Package zref Info: New property: page on input line 769.
+)
+\c@abspage=\count369
+Package zref Info: New property: abspage on input line 65.
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/ocgx2\ocgbase.sty
+Package: ocgbase 2022/08/04 v0.22 support package for ocgx2.sty
+\g_ocgbase_nd_int=\count370
+)
+\@anim@box=\box133
+\@anim@measbox=\box134
+\@anim@tmpdima=\dimen343
+\@anim@tmpdimb=\dimen344
+\@anim@num=\count371
+\@anim@curframe=\count372
+\@anim@curframe@zb=\count373
+\@anim@resizeflags=\count374
+\@anim@skipfram=\count375
+\@anim@mulframecnt=\count376
+\@anim@@tmlnfile=\read5
+\@anim@tmpcnt=\count377
+\c@@anim@ltxcnt=\count378
+\@anim@curlayer=\count379
+\@anim@lineno=\count380
+\@anim@curfield=\count381
+\@anim@@resizeflags=\count382
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2022/03/01 v3.6b Customizing captions (AR)
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
+\caption@tempdima=\dimen345
+\captionmargin=\dimen346
+\caption@leftmargin=\dimen347
+\caption@rightmargin=\dimen348
+\caption@width=\dimen349
+\caption@indent=\dimen350
+\caption@parindent=\dimen351
+\caption@hangindent=\dimen352
+Package caption Info: beamer document class detected.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption-beamer.sto
+File: caption-beamer.sto 2022/01/06 v2.0c Adaption of the caption package to the beamer document classes (AR)
+))
+\c@caption@flags=\count383
+\c@continuedfloat=\count384
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+Package caption Info: wrapfig package is loaded.
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2022/01/07 v1.5 Sub-captions (AR)
+\c@subfigure=\count385
+\c@subtable=\count386
+)
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 114.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/txfonts\t1txtt.fd
+File: t1txtt.fd 2000/12/15 v3.1
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count387
+\lst@gtempboxa=\box135
+\lst@token=\toks55
+\lst@length=\count388
+\lst@currlwidth=\dimen353
+\lst@column=\count389
+\lst@pos=\count390
+\lst@lostspace=\dimen354
+\lst@width=\dimen355
+\lst@newlines=\count391
+\lst@lineno=\count392
+\lst@maxwidth=\dimen356
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count393
+\lst@skipnumbers=\count394
+\lst@framebox=\box136
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarymatrix.code.tex
+File: tikzlibrarymatrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.code.tex
+File: pgflibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\arrowsize=\dimen357
+))
+\c@teo=\count395
+\c@post=\count396
+\c@defn=\count397
+\c@prob=\count398
+\c@hint=\count399
+ (panel.aux)
+\openout1 = `panel.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 306.
+LaTeX Font Info:    ... okay on input line 306.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: includehead includefoot 
+* h-part:(L,W,R)=(28.45274pt, 307.28987pt, 28.45274pt)
+* v-part:(T,H,B)=(0.0pt, 273.14662pt, 0.0pt)
+* \paperwidth=364.19536pt
+* \paperheight=273.14662pt
+* \textwidth=307.28987pt
+* \textheight=244.6939pt
+* \oddsidemargin=-43.81725pt
+* \evensidemargin=-43.81725pt
+* \topmargin=-72.26999pt
+* \headheight=14.22636pt
+* \headsep=0.0pt
+* \topskip=11.0pt
+* \footskip=14.22636pt
+* \marginparwidth=4.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count400
+\scratchdimen=\dimen358
+\scratchbox=\box137
+\nofMPsegments=\count401
+\nofMParguments=\count402
+\everyMPshowfont=\toks56
+\MPscratchCnt=\count403
+\MPscratchDim=\dimen359
+\MPnumerator=\count404
+\makeMPintoPDFobject=\count405
+\everyMPtoPDFconversion=\toks57
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+Package hyperref Info: Link coloring OFF on input line 306.
+ (panel.out) (panel.out)
+\@outlinefile=\write5
+\openout5 = `panel.out'.
+
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 306.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 306.
+\symnumbers=\mathgroup12
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 306.
+LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
+(Font)              `pureletters' in the math version `normal' on input line 306.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
+(Font)                  OT1/mathkerncmss/m/sl --> T1/cmss/m/it on input line 306.
+LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
+(Font)              `pureletters' in the math version `bold' on input line 306.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/mathkerncmss/bx/sl --> T1/cmss/m/it on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/cmr/m/n on input line 306.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 306.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/cmss/m/n on input line 306.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> T1/cmss/m/it on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> T1/cmss/m/it on input line 306.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 306.
+LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 306.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  T1/cmss/m/it --> T1/cmss/b/it on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  OT1/cmss/b/n --> T1/cmr/b/n on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  T1/cmss/b/n --> T1/cmss/b/n on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  T1/cmss/m/it --> T1/cmss/b/it on input line 306.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  T1/cmtt/m/n --> T1/cmtt/b/n on input line 306.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 306.
+LaTeX Font Info:    Encoding `T1' has changed to `OT1' for symbol font
+(Font)              `pureletters' in the math version `normal' on input line 306.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
+(Font)                  T1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 306.
+LaTeX Font Info:    Encoding `T1' has changed to `OT1' for symbol font
+(Font)              `pureletters' in the math version `bold' on input line 306.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  T1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 306.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 306.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-basic-dictionary-English.dict
+Dictionary: translator-basic-dictionary, Language: English 
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-bibliography-dictionary-English.dict
+Dictionary: translator-bibliography-dictionary, Language: English 
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-environment-dictionary-English.dict
+Dictionary: translator-environment-dictionary, Language: English 
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-months-dictionary-English.dict
+Dictionary: translator-months-dictionary, Language: English 
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-numbers-dictionary-English.dict
+Dictionary: translator-numbers-dictionary, Language: English 
+) (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-theorem-dictionary-English.dict
+Dictionary: translator-theorem-dictionary, Language: English 
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count406
+ (panel.nav) [1{C:/Users/aless/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
+
+] (panel.toc) [2
+
+] [3
+
+]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 341.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 341.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 341.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/jknappen\ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 341.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/sansmathaccent\ot1mathkerncmss.fd
+File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
+) [4
+
+] [5
+
+] [6
+
+] [7
+
+] [8
+
+] [9
+
+] [10
+
+] [11
+
+] [12
+
+] [13
+
+] [14
+
+] [15
+
+] [16
+
+]
+<Images/lam20.0corr0.5/RAE_recon.png, id=583, 1445.4pt x 289.08pt>
+File: Images/lam20.0corr0.5/RAE_recon.png Graphic file (type png)
+<use Images/lam20.0corr0.5/RAE_recon.png>
+Package pdftex.def Info: Images/lam20.0corr0.5/RAE_recon.png  used on input line 513.
+(pdftex.def)             Requested size: 291.92444pt x 58.38399pt.
+ [17
+
+ <./Images/lam20.0corr0.5/RAE_recon.png>] [18
+
+] [19
+
+]
+<Images/l21_experiment_from_0.1_to_10.1.jpg, id=680, 433.62pt x 289.08pt>
+File: Images/l21_experiment_from_0.1_to_10.1.jpg Graphic file (type jpg)
+<use Images/l21_experiment_from_0.1_to_10.1.jpg>
+Package pdftex.def Info: Images/l21_experiment_from_0.1_to_10.1.jpg  used on input line 542.
+(pdftex.def)             Requested size: 245.83282pt x 163.89069pt.
+ [20
+
+ <./Images/l21_experiment_from_0.1_to_10.1.jpg>] [21
+
+]
+<Images/original_l21.png, id=745, 290.08376pt x 290.08376pt>
+File: Images/original_l21.png Graphic file (type png)
+<use Images/original_l21.png>
+Package pdftex.def Info: Images/original_l21.png  used on input line 560.
+(pdftex.def)             Requested size: 153.64493pt x 153.64627pt.
+ [22
+
+ <./Images/original_l21.png (PNG copy)>]
+<Images/l21R_5.468.png, id=777, 290.08376pt x 290.08376pt>
+File: Images/l21R_5.468.png Graphic file (type png)
+<use Images/l21R_5.468.png>
+Package pdftex.def Info: Images/l21R_5.468.png  used on input line 585.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+<Images/l21L_5.468.png, id=778, 290.08376pt x 290.08376pt>
+File: Images/l21L_5.468.png Graphic file (type png)
+<use Images/l21L_5.468.png>
+Package pdftex.def Info: Images/l21L_5.468.png  used on input line 585.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+<Images/l21S_5.468.png, id=779, 290.08376pt x 290.08376pt>
+File: Images/l21S_5.468.png Graphic file (type png)
+<use Images/l21S_5.468.png>
+Package pdftex.def Info: Images/l21S_5.468.png  used on input line 585.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+ [23
+
+ <./Images/l21R_5.468.png (PNG copy)> <./Images/l21L_5.468.png (PNG copy)> <./Images/l21S_5.468.png (PNG copy)>]
+<Images/l21R_8.png, id=816, 290.08376pt x 290.08376pt>
+File: Images/l21R_8.png Graphic file (type png)
+<use Images/l21R_8.png>
+Package pdftex.def Info: Images/l21R_8.png  used on input line 610.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+<Images/l21L_8.png, id=817, 290.08376pt x 290.08376pt>
+File: Images/l21L_8.png Graphic file (type png)
+<use Images/l21L_8.png>
+Package pdftex.def Info: Images/l21L_8.png  used on input line 610.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+<Images/l21S_8.png, id=818, 290.08376pt x 290.08376pt>
+File: Images/l21S_8.png Graphic file (type png)
+<use Images/l21S_8.png>
+Package pdftex.def Info: Images/l21S_8.png  used on input line 610.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+ [24
+
+ <./Images/l21R_8.png (PNG copy)> <./Images/l21L_8.png (PNG copy)> <./Images/l21S_8.png (PNG copy)>]
+<Images/l21R_4.png, id=850, 290.08376pt x 290.08376pt>
+File: Images/l21R_4.png Graphic file (type png)
+<use Images/l21R_4.png>
+Package pdftex.def Info: Images/l21R_4.png  used on input line 635.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+<Images/l21L_4.png, id=851, 290.08376pt x 290.08376pt>
+File: Images/l21L_4.png Graphic file (type png)
+<use Images/l21L_4.png>
+Package pdftex.def Info: Images/l21L_4.png  used on input line 635.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+<Images/l21S_4.png, id=852, 290.08376pt x 290.08376pt>
+File: Images/l21S_4.png Graphic file (type png)
+<use Images/l21S_4.png>
+Package pdftex.def Info: Images/l21S_4.png  used on input line 635.
+(pdftex.def)             Requested size: 92.1879pt x 92.18687pt.
+ [25
+
+ <./Images/l21R_4.png (PNG copy)> <./Images/l21L_4.png (PNG copy)> <./Images/l21S_4.png (PNG copy)>] [26
+
+]
+<Images/isolation_forest.jpg, id=916, 433.62pt x 289.08pt>
+File: Images/isolation_forest.jpg Graphic file (type jpg)
+<use Images/isolation_forest.jpg>
+Package pdftex.def Info: Images/isolation_forest.jpg  used on input line 653.
+(pdftex.def)             Requested size: 245.83282pt x 163.89069pt.
+ [27
+
+ <./Images/isolation_forest.jpg>] [28
+
+] [29
+
+] [30
+
+] [31
+
+] [32
+
+]
+<Images/lam1.0ts_non_anomaly3907.jpg, id=1106, 387.4475pt x 279.0425pt>
+File: Images/lam1.0ts_non_anomaly3907.jpg Graphic file (type jpg)
+<use Images/lam1.0ts_non_anomaly3907.jpg>
+Package pdftex.def Info: Images/lam1.0ts_non_anomaly3907.jpg  used on input line 714.
+(pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
+ [33
+
+ <./Images/lam1.0ts_non_anomaly3907.jpg>]
+<Images/lam1.0ts_non_anomaly5199.jpg, id=1138, 387.4475pt x 279.0425pt>
+File: Images/lam1.0ts_non_anomaly5199.jpg Graphic file (type jpg)
+<use Images/lam1.0ts_non_anomaly5199.jpg>
+Package pdftex.def Info: Images/lam1.0ts_non_anomaly5199.jpg  used on input line 723.
+(pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
+ [34
+
+ <./Images/lam1.0ts_non_anomaly5199.jpg>]
+<Images/lam1.0ts_anomalyzoom9830.jpg, id=1170, 399.4925pt x 279.0425pt>
+File: Images/lam1.0ts_anomalyzoom9830.jpg Graphic file (type jpg)
+<use Images/lam1.0ts_anomalyzoom9830.jpg>
+Package pdftex.def Info: Images/lam1.0ts_anomalyzoom9830.jpg  used on input line 732.
+(pdftex.def)             Requested size: 215.10196pt x 150.2464pt.
+ [35
+
+ <./Images/lam1.0ts_anomalyzoom9830.jpg>]
+<Images/lam1.0ts_anomalyzoom16519.jpg, id=1202, 387.4475pt x 279.0425pt>
+File: Images/lam1.0ts_anomalyzoom16519.jpg Graphic file (type jpg)
+<use Images/lam1.0ts_anomalyzoom16519.jpg>
+Package pdftex.def Info: Images/lam1.0ts_anomalyzoom16519.jpg  used on input line 741.
+(pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
+ [36
+
+ <./Images/lam1.0ts_anomalyzoom16519.jpg>]
+<Images/lam1.0ts_anomalyzoom18313.jpg, id=1234, 396.48125pt x 279.0425pt>
+File: Images/lam1.0ts_anomalyzoom18313.jpg Graphic file (type jpg)
+<use Images/lam1.0ts_anomalyzoom18313.jpg>
+Package pdftex.def Info: Images/lam1.0ts_anomalyzoom18313.jpg  used on input line 750.
+(pdftex.def)             Requested size: 215.10196pt x 151.39175pt.
+ [37
+
+ <./Images/lam1.0ts_anomalyzoom18313.jpg>]
+<Images/lam1.0ts_non_anomaly12235.jpg, id=1267, 391.4625pt x 279.0425pt>
+File: Images/lam1.0ts_non_anomaly12235.jpg Graphic file (type jpg)
+<use Images/lam1.0ts_non_anomaly12235.jpg>
+Package pdftex.def Info: Images/lam1.0ts_non_anomaly12235.jpg  used on input line 759.
+(pdftex.def)             Requested size: 215.10196pt x 153.32907pt.
+ [38
+
+ <./Images/lam1.0ts_non_anomaly12235.jpg>] [39
+
+]
+<Images/LSTMlam3.3ts_non_anomaly13390.jpg, id=1330, 402.50375pt x 279.0425pt>
+File: Images/LSTMlam3.3ts_non_anomaly13390.jpg Graphic file (type jpg)
+<use Images/LSTMlam3.3ts_non_anomaly13390.jpg>
+Package pdftex.def Info: Images/LSTMlam3.3ts_non_anomaly13390.jpg  used on input line 778.
+(pdftex.def)             Requested size: 215.10196pt x 149.12233pt.
+ [40
+
+ <./Images/LSTMlam3.3ts_non_anomaly13390.jpg>]
+<Images/LSTMlam3.3ts_anomalyzoom5105.jpg, id=1362, 387.4475pt x 279.0425pt>
+File: Images/LSTMlam3.3ts_anomalyzoom5105.jpg Graphic file (type jpg)
+<use Images/LSTMlam3.3ts_anomalyzoom5105.jpg>
+Package pdftex.def Info: Images/LSTMlam3.3ts_anomalyzoom5105.jpg  used on input line 788.
+(pdftex.def)             Requested size: 215.10196pt x 154.92151pt.
+ [41
+
+ <./Images/LSTMlam3.3ts_anomalyzoom5105.jpg>] [42
+
+]
+<Images/anom_if0.001pos132.jpg, id=1425, 391.4625pt x 279.0425pt>
+File: Images/anom_if0.001pos132.jpg Graphic file (type jpg)
+<use Images/anom_if0.001pos132.jpg>
+Package pdftex.def Info: Images/anom_if0.001pos132.jpg  used on input line 806.
+(pdftex.def)             Requested size: 215.10196pt x 153.32907pt.
+ [43
+
+ <./Images/anom_if0.001pos132.jpg>] [44
+
+] [45
+
+] [46
+
+] (panel.bbl) [47
+
+ <C:/Users/aless/AppData/Local/Programs/MiKTeX/tex/latex/beamer/beamericonarticle.pdf>]
+\tf@nav=\write6
+\openout6 = `panel.nav'.
+
+\tf@toc=\write7
+\openout7 = `panel.toc'.
+
+\tf@snm=\write8
+\openout8 = `panel.snm'.
+
+ (panel.aux)
+Package rerunfilecheck Info: File `panel.out' has not changed.
+(rerunfilecheck)             Checksum: 4FC92451D8699CAD24A55CE860B71EE7;570.
+ ) 
+Here is how much of TeX's memory you used:
+ 33510 strings out of 475389
+ 675268 string characters out of 2777000
+ 984857 words of memory out of 3000000
+ 54045 multiletter control sequences out of 15000+600000
+ 507531 words of font info for 132 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 128i,19n,122p,444b,682s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss2488.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0700.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1095.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk> <C:\Users\aless\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0600.pk><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss9.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi12.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi9.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on panel.pdf (47 pages, 1030211 bytes).
+PDF statistics:
+ 1992 PDF objects out of 2073 (max. 8388607)
+ 103 named destinations out of 1000 (max. 500000)
+ 257 words of extra memory for PDF output out of 10000 (max. 10000000)
+
