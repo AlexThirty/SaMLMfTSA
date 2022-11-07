@@ -315,14 +315,14 @@
 
 \nocite{RAE}
 
-\section{Introduction and Background}
+\section{Introduction and main components}
 
 \begin{frame}
     \frametitle{Introduction}
     \begin{itemize}
         \item Anomaly detection is a fundamental problem when dealing with large amounts of data.
-        \item e.g. Identify with precision which samples or products are anomalous w.r.t. the rest.
-        \item e.g. We want to know if a battery is in good state and to predict whether there is a concrete risk of damage/explosion by looking at its historical data.
+        \item e.g. Detect outliers in large datasets that may have bad influence influence our data pipeline.
+        \item e.g. We want to know if a battery is in good state and to detect strange behaviours by looking at its historical data.
         \item The main challenge is related to the fact that anomalies are sparse points hidden in a large amount of normal data.
         \item This presentation is about the Robust Deep Autoencoder models \cite{RAE} and its applications focusing on anomaly detection.
     \end{itemize}
@@ -332,9 +332,8 @@
 	\frametitle{Deep Autoencoders}
 	\begin{itemize}
 		\item A Deep Autoencoder (DAE) has two main components: an encoder $E$ and a Decoder $D$. It produces a low dimensional representation of data $Z=E(X)$.
-		\item The DAE learns the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$.
 		\item $E, D$ can be any mapping between the data space and the coded space. Usually we use FCNN or more complex models (e.g. LSTM or GRU).
-		\item The loss function is
+		\item The DAE learns the identity map so that the reconstruction $\bar{X}=D(E(X))$ is as close as possible to the original input $X$
 			\begin{equation}
 				\min_{\theta, \phi}{\norm{X-D_{\theta}(E_{\phi}(X))}_{2}}
 			\end{equation}
@@ -344,7 +343,7 @@
 \begin{frame}
 	\frametitle{Principal Component Analysis (PCA)}
 	\begin{itemize}
-		\item Assume following data shape: $N$ samples of $d$ dimensional data $X\in \R^{N\times d}$ and assume each feature has $0$ mean.
+		\item Assume following data shape: $N$ samples of $d$ dimensional data $X\in \R^{N\times d}$ and w.l.o.g. each feature has $0$ mean.
 		\item Mathematically, PCA is an orthogonal linear transformation $U$ s.t. in the new coordinate system the $i$-th component has the $i$-th greatest data variance.
 		\item PCA can be used for dimensionality reduction: project the data on the first $k<d$ principal components.
 		\item How to find the new basis:
@@ -371,7 +370,7 @@
 				\min_{L,S}{\rho(L)+\lambda \norm{S}_{0}}\\
 				\text{s. t. } X = L+S
 			\end{align}
-			where $\rho(\cdot)$ is the rank of a matrix and we used the zero norm.
+			where $\rho(\cdot)$ is the rank of a matrix and we used the zero norm. $\lambda$ controls the sparsity.
 		\item This optimization problem is NP-hard and tractable only for small metrices.
 		\item New objective:
 			\begin{equation}
@@ -386,8 +385,8 @@
 \begin{frame}
 	\frametitle{Robust Deep Autoencoders}
 	\begin{itemize}
-		\item Robust Deep Autoencoders (RDAE) combine the representation learning of DAEs and the anomaly detection capability of RPCA.
-		\item Noise and outliers are incompressible in the lower dimensional space we want to represent our data in.
+		\item Robust Deep Autoencoders (RDAE) idea: combine the representation learning of DAEs and the anomaly detection capability of RPCA.
+		\item Leave out the sparse part $S$ and learn a low-dimensional representation of $L$.
 		\item There are two kinds of RDAE, one for $l_1$ regularization and one for $l_{2,1}$.
 	\end{itemize}
 \end{frame}
@@ -469,12 +468,12 @@
 \end{frame}
 
 \begin{frame}
-    Proposed training procedure: Alternating Direction Method of Multipliers (ADMM), a two step itereative process.\newline
-	Given input $X\in \R^{N\times n}$, initialize $L_D\in \R^{N\times d}, S\in \R^{N\times d}$ as zero matrices, 
+    The proposed optimization method is a two step iterative process.\newline
+	Given input $X\in \R^{N\times d}$, initialize $L_D\in \R^{N\times d}, S\in \R^{N\times d}$ as zero matrices, 
 	$L_S = X$ and initialize the DAE randomly. For each iteration do:
 	\begin{itemize}
 		\item $L_D = X - S$
-		\item Minimize $\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2$ with backpropagation.
+		\item Minimize $\norm{L_D -D_{\theta}(E_{\theta}(L_D))}_2$ with backpropagation (DAE).
 		\item Set $L_D = D(E(L_D))$ as the reconstruction.
 		\item Set $S = X - L_D$.
 		\item Optimize $S$ using a $\prox_{\lambda, l_{\cdot}}$ function of choice.
@@ -499,8 +498,9 @@
 \begin{frame}
 	\frametitle{$l_1$ Robust Deep Autoencoder}
 	\begin{itemize}
-		\item We take a RDAE with a FCNN architecture with layers of size $784$ (input), $200$ and $10$ (the bottleneck and hidden feature layer). $10$ outer iterations and $100$ inner iterations.
+		\item We take a RDAE with a FCNN architecture with layers of size $784$ (input), $200$ and $10$ (the bottleneck and hidden feature layer). $10$ training iterations and $100$ DAE training epochs each.
 		\item The training images get corrupted with a percentage of pixel (from $5\%$ to $50\%$) changed to a random value between $0$ and $1$. These are used to train the RDAE.
+		\item Implemented using python $3.8$ and Tensorflow $2.9$.
 	\end{itemize}
 \end{frame}
 
@@ -519,14 +519,15 @@
 		\item All the $4$ digit images for training are collected in our dataset.
 		\item Then, some images are chosen at random from all the other digits until they reach $5\%$ of total images in the dataset.
 		\item These will be considered as the outliers of our data.
+		\item Example application: given a pool of batteries find those with problems and/or defects.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}
 	\begin{itemize}
-		\item The $l_{2,1}$ RDAE is trained on this dataset without any side information. It has to recognize outliers completely on its own. Same architecture as before.
-		\item The only parameter that requires tuning is $\lambda$. We assess performance with the accuracy, precision, recall and $F1=2\frac{PR}{P+R}$ metrics.
+		\item The $l_{2,1}$ RDAE is trained on this dataset without any side information. Same architecture as before.
+		\item The only parameter that requires tuning is $\lambda$. We assess performance with the accuracy, precision, recall and $F_1=2\frac{PR}{P+R}$ metrics.
 		\item We consider an instance anomalous whenever the $S$ matrix has non-zero entries on its row.
 	\end{itemize}
 \end{frame}
@@ -543,7 +544,7 @@
 \begin{frame}
 	\begin{itemize}
 		\item The maximum performance is obtained with $\lambda=5.468$ with an $F_1$ score of $0.668$.
-		\item Focusing on all values from $\lambda=5$ to $\lambda=6$ the RDAE has a $F_1$ score almost everytime above $0.55$.
+		\item From $\lambda=5$ to $\lambda=6$ the RDAE has a $F_1$ score almost everytime above $0.55$.
 		\item Precision and recall are both in the range $[0.6, 0.7]$ for $\lambda$ close to the optimal.
 		\item Let's look at the reconstructions by the DAE of the RDAE $D(E(X))$, the cleaned images $L_D$ and the sparse image $S$ from $3$ different values of $\lambda$: low, optimal and high.
 	\end{itemize}
@@ -657,7 +658,6 @@
         \item Now we have assessed the performance on a synthetic dataset we want to see how to apply this model to real world challenges.
         \item Data is in general UNLABELED. Specially with loads of data, we can't do hand labeling of anomalies.
         \item We want to see if the model still works for time series.
-        \item This could have a true application in Electra Vehicles products: given historical battery data if we are able to detect anomalies we can better spot dangers and errors.
     \end{itemize}
 \end{frame}
 
@@ -666,7 +666,8 @@
 	\begin{itemize}
 		\item In this case we are going to use a dataset similar to our interest.
         \item It is taken from the Numenta Anomaly Benchmark \hyperref{https://github.com/numenta/NAB/tree/master/data}{}{}{(NAB)}. The database is called machine temperature system failure.
-		\item It is the sensor data of an internal component of a large, industrial mahcine. It should have $3$ kinds of anomalies: the first anomaly is a planned shutdown of the machine. The second anomaly should be difficult to detect and directly led to the third anomaly, a catastrophic failure of the machine.
+		\item It is the sensor data of an internal component of a large, industrial mahcine. It should have $3$ kinds of anomalies: mainly planned shutdowns of the machine, then the second kind should be difficult to detect and directly led to the third anomaly, a catastrophic failure of the machine.
+		\item Example application: Electra Vehicles' EVE-AI analytics. Find strange patterns in driving styles or battery problems through sensors' historical data.
 	\end{itemize}
 \end{frame}
 
@@ -683,7 +684,7 @@
 	\frametitle{RDAE architectures and analysis}
 	I tried using $3$ architectures for the autoencoder part in the RDAE.
 	\begin{itemize}
-		\item The first one is a Dense Neural Network with hidden layers of $60$ and $20$. It is trained for $20$ outer iterations and $50$ inner iterations for the autoencoder, batch size $256$ , $\epsilon=10^{-8}$.
+		\item The first one is a Dense Neural Network with hidden layers of $60$ and $20$. It is trained for $20$ training iterations and $50$ DAE epochs each, batch size $256$ , $\epsilon=10^{-8}$.
 		\item The second and the third one are a LSTM and a GRU with two layers of $32$ and $16$ units, $10$ outer iterations and $25$ inner iterations with same batch size as before.
 		\item Since data is unlabeled we don't have a clear benchmark for the valie of $\lambda$. I tried different values to see how the number of outliers scales.
 	\end{itemize}
@@ -725,15 +726,6 @@
 	\frametitle{Dense RDAE}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_non_anomaly12235.jpg}
-		\caption[]{Example of a non anomaly subsequence for $\lambda=1.0$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Dense RDAE}
-	\begin{figure}
-		\centering
 		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomalyzoom9830.jpg}
 		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
 	\end{figure}
@@ -754,6 +746,15 @@
 		\centering
 		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_anomalyzoom18313.jpg}
 		\caption[]{Example of a anomaly subsequence for $\lambda=1.0$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dense RDAE}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/lam1.0ts_non_anomaly12235.jpg}
+		\caption[]{Example of a non anomaly subsequence for $\lambda=1.0$}
 	\end{figure}
 \end{frame}
 
@@ -807,7 +808,7 @@
 \begin{frame}
 	\frametitle{Final comments}
 	\begin{itemize}
-		\item The RDAE is a powerful tool for denoising and anomaly detection.
+		\item The RDAE is a powerful tool for denoising and anomaly detection with many application both for images, time series and can detect different kinds of anomalies in a general setting.
 		\item Unfortunately the main quest is to find the correct $\lambda$ value. With unlabeled data this could be very difficult.
 		\item In that case, a possible way out is to know the approximate anomaly rate and to hope the anomalies found match the true ones.
 	\end{itemize}
